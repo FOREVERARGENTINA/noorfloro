@@ -10,8 +10,8 @@
     "lint": "next lint",
     "migrate:products": "node scripts/migrate_products_to_firestore.js",
     "pages:build": "npx @opennextjs/cloudflare build",
-    "pages:dev": "wrangler pages dev .worker-next --compatibility-flag=nodejs_compat",
-    "pages:deploy": "npm run pages:build && wrangler pages deploy .worker-next"
+    "pages:dev": "wrangler pages dev .open-next --compatibility-flag=nodejs_compat",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .open-next"
   },
   "keywords": [],
   "author": "",
