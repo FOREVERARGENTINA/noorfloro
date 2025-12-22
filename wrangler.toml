@@ -1,0 +1,13 @@
+name = "noorfloro"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = ".worker-next"
+
+# Environment variables for production
+[env.production]
+vars = {}
+
+# You can add environment variables here
+# [env.production.vars]
+# NEXT_PUBLIC_FIREBASE_API_KEY = "your-api-key"

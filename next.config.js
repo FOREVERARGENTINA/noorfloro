@@ -4,11 +4,10 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Image optimization configuration
+  // Note: Cloudflare Workers doesn't support Next.js Image Optimization API
+  // Images will be served unoptimized, or you can use Cloudflare Images
   images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Configure external image sources
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -35,8 +34,6 @@ const nextConfig = {
         hostname: 'placehold.co',
       },
     ],
-    // Fallback for unoptimized images
-    unoptimized: false,
   },
 
   // Compiler options for better performance

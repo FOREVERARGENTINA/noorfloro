@@ -8,7 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:products": "node scripts/migrate_products_to_firestore.js"
+    "migrate:products": "node scripts/migrate_products_to_firestore.js",
+    "pages:build": "npx @opennextjs/cloudflare",
+    "pages:dev": "wrangler pages dev .worker-next --compatibility-flag=nodejs_compat",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .worker-next"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +21,15 @@
     "@tailwindcss/postcss": "^4.1.17",
     "autoprefixer": "^10.4.21",
     "firebase-admin": "^13.6.0",
-    "next": "^16.0.1",
+    "next": "15.5.9",
     "postcss": "^8.5.6",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "^1.14.7",
+    "vercel": "^47.0.4",
+    "wrangler": "^4.56.0"
   }
 }
