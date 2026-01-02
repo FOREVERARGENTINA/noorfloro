@@ -31,20 +31,20 @@ export default function Header() {
       <nav className="container-custom" aria-label="Navegación principal">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded">
-            <img src="/images/logo.png" alt="TiendaOnline" className="h-10 w-auto" />
-            <span className="sr-only">TiendaOnline</span>
+          <Link href="/" className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-noorfloro-orange rounded">
+            <img src="/images/logo.png" alt="NOORFLORO" className="h-10 w-auto" />
+            <span className="sr-only">NOORFLORO</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/" className="text-gray-700 hover:text-sky-600 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 rounded px-2 py-1">
+            <Link href="/" className="text-gray-700 hover:text-noorfloro-orange transition-colors focus:outline-none focus:ring-2 focus:ring-noorfloro-orange rounded px-2 py-1">
               Inicio
             </Link>
-            <Link href="/productos" className="text-gray-700 hover:text-sky-600 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 rounded px-2 py-1">
+            <Link href="/productos" className="text-gray-700 hover:text-noorfloro-orange transition-colors focus:outline-none focus:ring-2 focus:ring-noorfloro-orange rounded px-2 py-1">
               Productos
             </Link>
-            <Link href="/contacto" className="text-gray-700 hover:text-sky-600 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 rounded px-2 py-1">
+            <Link href="/contacto" className="text-gray-700 hover:text-noorfloro-orange transition-colors focus:outline-none focus:ring-2 focus:ring-noorfloro-orange rounded px-2 py-1">
               Contacto
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden tap-target flex items-center justify-center text-gray-700 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded"
+            className="md:hidden tap-target flex items-center justify-center text-gray-700 hover:text-noorfloro-orange focus:outline-none focus:ring-2 focus:ring-noorfloro-orange rounded"
             aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={mobileMenuOpen}
           >
@@ -74,21 +74,21 @@ export default function Header() {
             <div className="flex flex-col space-y-4">
               <Link
                 href="/"
-                className="text-gray-700 hover:text-sky-600 transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="text-gray-700 hover:text-noorfloro-orange transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-noorfloro-orange"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Inicio
               </Link>
               <Link
                 href="/productos"
-                className="text-gray-700 hover:text-sky-600 transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="text-gray-700 hover:text-noorfloro-orange transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-noorfloro-orange"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Productos
               </Link>
               <Link
                 href="/contacto"
-                className="text-gray-700 hover:text-sky-600 transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-sky-500 flex items-center"
+                className="text-gray-700 hover:text-noorfloro-orange transition-colors tap-target px-2 py-2 rounded focus:outline-none focus:ring-2 focus:ring-noorfloro-orange flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contacto

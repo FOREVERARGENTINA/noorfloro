@@ -8,15 +8,16 @@ export default function ProductCard({ product }) {
   const waNumber = '5491162961526'
 
   const getWaLink = () => {
-    const url = `/producto/${product.id}`
-    const text = `Hola, quisiera consultar por el producto: ${product.name} (ID: ${product.id}) – ${url}`
+    const site = process.env.NEXT_PUBLIC_SITE_URL || ''
+    const url = `${site.replace(/\/$/, '')}/producto/${product.id}`
+    const text = `Hola, quisiera consultar por el producto "${product.name}". ${url}`
     return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`
   }
 
   return (
-    <article className="card group">
-      <Link href={`/producto/${product.id}`} className="block">
-        <div className="relative aspect-square bg-gray-200 overflow-hidden">
+    <article className="card group h-full flex flex-col">
+      <Link href={`/producto/${product.id}`} className="block flex-1">
+        <div className="relative aspect-[4/3] bg-gray-200 overflow-hidden">
           <Image
             src={product.images[0]}
             alt={`Imagen de ${product.name}`}
@@ -37,32 +38,32 @@ export default function ProductCard({ product }) {
           )}
         </div>
 
-        <div className="p-4">
-          <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-sky-600 transition-colors">
+        <div className="p-6">
+          <h3 className="font-semibold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-sky-600 transition-colors">
             {product.name}
           </h3>
 
-          <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+          <p className="text-gray-600 text-base mb-4 line-clamp-2">
             {product.description}
           </p>
 
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-sky-600">
+            <span className="text-3xl font-bold text-sky-600">
               {formatPrice(product.price)}
             </span>
           </div>
         </div>
       </Link>
 
-      <div className="px-4 pb-4">
+      <div className="px-6 pb-6">
         {product.stock === 0 ? (
-          <button className="btn w-full bg-gray-300 text-gray-500 cursor-not-allowed" disabled aria-label={`${product.name} sin stock`}>Sin stock</button>
+          <button className="btn w-full py-3 bg-gray-300 text-gray-500 cursor-not-allowed" disabled aria-label={`${product.name} sin stock`}>Sin stock</button>
         ) : (
           <a
             href={getWaLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary w-full"
+            className="btn btn-primary w-full py-3"
             aria-label={`Consultar por ${product.name} vía WhatsApp`}
           >
             Consultar por este producto

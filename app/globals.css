@@ -10,7 +10,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid #0284c7;
+    outline: 2px solid #FF6B35;
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
@@ -61,7 +61,7 @@
 }
 
 .btn:focus {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid #FF6B35;
   outline-offset: 2px;
 }
 
@@ -71,21 +71,21 @@
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+  background: linear-gradient(90deg, #FF6B35 0%, #FF8C61 100%);
   color: #fff;
-  box-shadow: 0 4px 16px 0 rgb(14 165 233 / 0.12);
+  box-shadow: 0 4px 16px 0 rgb(255 107 53 / 0.12);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(90deg, #0369a1 0%, #0ea5e9 100%);
+  background: linear-gradient(90deg, #E85A2B 0%, #FF6B35 100%);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px 0 rgb(14 165 233 / 0.18);
+  box-shadow: 0 8px 24px 0 rgb(255 107 53 / 0.18);
 }
 
 .btn-primary:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #FF8C61;
   outline-offset: 2px;
 }
 
@@ -110,22 +110,22 @@
 }
 
 .btn-outline {
-  border: 2px solid #0ea5e9;
-  color: #0ea5e9;
-  background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid #FF6B35;
+  color: #FF6B35;
+  background: linear-gradient(90deg, #FFF5F2 0%, #FFE8E0 100%);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
 .btn-outline:hover:not(:disabled) {
-  background: linear-gradient(90deg, #bae6fd 0%, #7dd3fc 100%);
-  color: #0369a1;
+  background: linear-gradient(90deg, #FFD4C4 0%, #FFBFA8 100%);
+  color: #E85A2B;
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 16px 0 rgb(14 165 233 / 0.10);
+  box-shadow: 0 4px 16px 0 rgb(255 107 53 / 0.10);
 }
 
 .btn-outline:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #FF8C61;
   outline-offset: 2px;
 }
 
@@ -156,7 +156,7 @@
 }
 
 .input:focus {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid #FF6B35;
   outline-offset: 2px;
   border-color: transparent;
 }

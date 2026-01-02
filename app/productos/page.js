@@ -26,27 +26,22 @@ export default function ProductosPage() {
           </div>
         </section>
 
-        {/* Category Filter */}
-        <section className="bg-white border-b border-gray-200 sticky top-16 z-40">
+        {/* Category Filter (mobile: dropdown) */}
+        <section className="bg-white border-b border-gray-200 sticky top-16 z-40 md:hidden">
           <div className="container-custom py-4">
             <div className="flex items-center justify-between mb-4 md:mb-0">
-              <h2 className="text-lg font-semibold sr-only md:not-sr-only">Categorías:</h2>
-              <div className="flex flex-wrap gap-2 md:gap-4">
-                {categories.map(category => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`px-4 py-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-sky-500 ${
-                      selectedCategory === category.id
-                        ? 'bg-sky-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                    aria-pressed={selectedCategory === category.id}
-                    aria-label={`Filtrar por ${category.name}`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+              <label htmlFor="category-select" className="text-lg font-semibold">Categorías</label>
+              <div>
+                <select
+                  id="category-select"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="bg-white border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-noorfloro-orange"
+                >
+                  {categories.map(category => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
@@ -55,35 +50,63 @@ export default function ProductosPage() {
         {/* Products Grid */}
         <section className="section">
           <div className="container-custom">
-            {filteredProducts.length === 0 ? (
-              <div className="text-center py-12">
-                <svg className="w-24 h-24 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                </svg>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">No hay productos en esta categoría</h3>
-                <p className="text-gray-600 mb-6">Intenta seleccionar otra categoría</p>
-                <button
-                  onClick={() => setSelectedCategory('todos')}
-                  className="btn btn-primary"
-                >
-                  Ver todos los productos
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="mb-6">
-                  <p className="text-gray-600">
-                    Mostrando {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
-                  </p>
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Sidebar filters (left on md+) */}
+              <aside className="hidden md:block md:w-64 lg:w-72">
+                <div className="sticky top-24 bg-white p-4 rounded border">
+                  <h3 className="text-lg font-semibold mb-4">Categorías</h3>
+                  <div className="flex flex-col gap-2">
+                    {categories.map(category => (
+                      <button
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`w-full text-left px-4 py-2 rounded transition-all focus:outline-none focus:ring-2 focus:ring-noorfloro-orange ${
+                          selectedCategory === category.id
+                            ? 'bg-noorfloro-orange text-white'
+                            : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                        }`}
+                        aria-pressed={selectedCategory === category.id}
+                        aria-label={`Filtrar por ${category.name}`}>
+                        {category.name}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+              </aside>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-              </>
-            )}
+              {/* Products list */}
+              <div className="flex-1">
+                {filteredProducts.length === 0 ? (
+                  <div className="text-center py-12">
+                    <svg className="w-24 h-24 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">No hay productos en esta categoría</h3>
+                    <p className="text-gray-600 mb-6">Intenta seleccionar otra categoría</p>
+                    <button
+                      onClick={() => setSelectedCategory('todos')}
+                      className="btn btn-primary"
+                    >
+                      Ver todos los productos
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="mb-6">
+                      <p className="text-gray-600">
+                        Mostrando {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                      {filteredProducts.map(product => (
+                        <ProductCard key={product.id} product={product} />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </section>
       </main>

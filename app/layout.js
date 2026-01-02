@@ -1,34 +1,34 @@
 import './globals.css'
 
 export const metadata = {
-  metadataBase: new URL('https://tutienda.com'),
-  title: 'Tienda Online - Los mejores productos al mejor precio',
-  description: 'Encuentra productos de calidad con envíos a todo el país. Compra seguro con Mercado Pago.',
-  keywords: ['tienda online', 'e-commerce', 'compras', 'productos'],
-  authors: [{ name: 'Tienda Online' }],
+  metadataBase: new URL('https://www.noorfloro.com.ar'),
+  title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
+  description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos para pared. Envíos a todo el país.',
+  keywords: ['pisos flotantes', 'pisos vinílicos', 'baldosas autoadhesivas', 'césped sintético', 'alfombras', 'revestimientos', 'noorfloro'],
+  authors: [{ name: 'NOORFLORO' }],
   icons: {
     icon: '/images/favicon.ico',
   },
   openGraph: {
     type: 'website',
     locale: 'es_AR',
-    url: 'https://tutienda.com',
-    siteName: 'Tienda Online',
-    title: 'Tienda Online - Los mejores productos',
-    description: 'Encuentra productos de calidad con envíos a todo el país',
+    url: 'https://www.noorfloro.com.ar',
+    siteName: 'NOORFLORO',
+    title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
+    description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos para pared',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tienda Online',
+        alt: 'NOORFLORO',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tienda Online - Los mejores productos',
-    description: 'Encuentra productos de calidad con envíos a todo el país',
+    title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
+    description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos',
     images: ['/images/og-image.jpg'],
   },
   robots: {
