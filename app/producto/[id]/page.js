@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { getProductById, formatPrice } from '@/lib/products'
@@ -10,7 +9,6 @@ import Footer from '@/components/Footer'
 export default function ProductDetailPage() {
   const params = useParams()
   const router = useRouter()
-  const [quantity, setQuantity] = useState(1)
   
   const product = getProductById(params.id)
   
@@ -38,7 +36,7 @@ export default function ProductDetailPage() {
   const waNumber = '5491162961526'
   const getWaLink = () => {
     const url = `/producto/${product.id}`
-    const text = `Hola, quisiera consultar por el producto: ${product.name} (ID: ${product.id}). Cantidad: ${quantity}. ${url}`
+    const text = `Hola, quisiera consultar por el producto: ${product.name} (ID: ${product.id}). ${url}`
     return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`
   }
 
@@ -89,28 +87,7 @@ export default function ProductDetailPage() {
                 </span>
               </div>
               
-              {product.stock > 0 && (
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cantidad
-                  </label>
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                    >
-                      -
-                    </button>
-                    <span className="w-12 text-center font-medium">{quantity}</span>
-                    <button
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                      className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              )}
+
               
               {product.stock === 0 ? (
                 <button className="w-full py-3 px-6 rounded-lg font-medium bg-gray-300 text-gray-500 cursor-not-allowed">Sin stock</button>

@@ -108,11 +108,11 @@ export default function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="section bg-noorfloro-orange text-white">
+        <section className="section bg-[#FA8F01] text-white">
           <div className="container-custom text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Listo para comprar?</h2>
-            <p className="text-xl mb-8 text-orange-100">Explora nuestro catálogo completo y encuentra lo que buscas</p>
-            <Link href="/productos" className="btn btn-primary bg-white text-noorfloro-orange hover:bg-gray-100 text-lg px-8">
+            <p className="text-xl mb-8 font-semibold">Explora nuestro catálogo completo y encuentra lo que buscas</p>
+            <Link href="/productos" className="btn bg-white text-[#FA8F01] hover:bg-gray-100 text-lg px-8 font-semibold">
               Explorar catálogo
             </Link>
           </div>

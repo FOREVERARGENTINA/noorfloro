@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         // Colores de marca NOORFLORO
         'noorfloro': {
-          'orange': '#FF6B35',      // Naranja principal
+          'orange': '#FA8F01',      // Naranja principal
           'orange-light': '#FF8C61', // Naranja claro
           'orange-dark': '#E85A2B',  // Naranja oscuro
           'black': '#1A1A1A',        // Negro

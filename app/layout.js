@@ -52,6 +52,19 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Author / Creator (internal credit) */}
+        <link rel="author" href="https://www.FrandoWeb.com" />
+        <meta name="author" content="Hernan de FrandoWeb" />
+
+        {/* Social profile links for verification / metadata */}
+        <link rel="me" href="https://www.instagram.com/noorfloropisos/" />
+        <link rel="me" href="https://www.facebook.com/p/Noorfloro-100070396863140/" />
+
+        {/* Open Graph helpers for social platforms */}
+        <meta property="og:see_also" content="https://www.instagram.com/noorfloropisos/" />
+        <meta property="og:see_also" content="https://www.facebook.com/p/Noorfloro-100070396863140/" />
+        <meta property="article:publisher" content="https://www.facebook.com/p/Noorfloro-100070396863140/" />
       </head>
       <body className="antialiased bg-gray-50 text-gray-900">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky-600 focus:text-white focus:rounded">

@@ -10,7 +10,7 @@
   }
 
   *:focus-visible {
-    outline: 2px solid #FF6B35;
+    outline: 2px solid #FA8F01;
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
@@ -61,7 +61,7 @@
 }
 
 .btn:focus {
-  outline: 2px solid #FF6B35;
+  outline: 2px solid #FA8F01;
   outline-offset: 2px;
 }
 
@@ -71,17 +71,29 @@
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, #FF6B35 0%, #FF8C61 100%);
+  background: linear-gradient(90deg, #FA8F01 0%, #FF8C61 100%);
   color: #fff;
-  box-shadow: 0 4px 16px 0 rgb(255 107 53 / 0.12);
+  box-shadow: 0 4px 16px 0 rgb(250 143 1 / 0.12);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
+/* Selected category in sidebar */
+.category-selected {
+  background-color: #FA8F01; /* fallback solid color */
+  color: #ffffff !important;
+}
+
+.category-selected:focus,
+.category-selected:focus-visible {
+  outline: 2px solid #FF8C61;
+  outline-offset: 2px;
+}
+
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(90deg, #E85A2B 0%, #FF6B35 100%);
+  background: linear-gradient(90deg, #E85A2B 0%, #FA8F01 100%);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px 0 rgb(255 107 53 / 0.18);
+  box-shadow: 0 8px 24px 0 rgb(250 143 1 / 0.18);
 }
 
 .btn-primary:focus {
@@ -110,8 +122,8 @@
 }
 
 .btn-outline {
-  border: 2px solid #FF6B35;
-  color: #FF6B35;
+  border: 2px solid #FA8F01;
+  color: #FA8F01;
   background: linear-gradient(90deg, #FFF5F2 0%, #FFE8E0 100%);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -121,7 +133,7 @@
   background: linear-gradient(90deg, #FFD4C4 0%, #FFBFA8 100%);
   color: #E85A2B;
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 16px 0 rgb(255 107 53 / 0.10);
+  box-shadow: 0 4px 16px 0 rgb(250 143 1 / 0.10);
 }
 
 .btn-outline:focus {
@@ -156,7 +168,7 @@
 }
 
 .input:focus {
-  outline: 2px solid #FF6B35;
+  outline: 2px solid #FA8F01;
   outline-offset: 2px;
   border-color: transparent;
 }
