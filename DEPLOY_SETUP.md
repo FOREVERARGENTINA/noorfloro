@@ -1,33 +1,35 @@
 # GitHub Auto-Deploy Setup
 
-## Paso 1: Crear Cloudflare API Token
+## Paso 1: Crear Cloudflare API Token con Permisos Correctos
 
 1. Ve a: https://dash.cloudflare.com/profile/api-tokens
 2. Click en **"Create Token"**
 3. Usa la plantilla **"Edit Cloudflare Workers"**
-4. **Permissions:** Asegúrate de tener:
-   - Account → Workers Scripts → Edit
-   - Account → Account Settings → Read
+4. **IMPORTANTE - Verifica estos permisos:**
+   - ✅ Account → Workers Scripts → Edit
+   - ✅ Account → Workers Routes → Edit (si usas rutas)
+   - ✅ Account → Account Settings → Read
+   - ✅ User → User Details → Read (para evitar warnings)
 5. Click **"Continue to summary"**
 6. Click **"Create Token"**
 7. **COPIA EL TOKEN** (solo se muestra una vez)
 
-## Paso 2: Configurar GitHub Secrets
+## Paso 2: Actualizar GitHub Secrets
 
 1. Ve a tu repositorio en GitHub: https://github.com/FOREVERARGENTINA/noorfloro
 2. Click en **Settings** (pestaña superior)
 3. En el menú lateral izquierdo: **Secrets and variables** → **Actions**
-4. Click en **"New repository secret"**
 
-### Agregar Secret 1:
-- **Name:** `CLOUDFLARE_API_TOKEN`
-- **Value:** [Pega el token que copiaste]
-- Click **"Add secret"**
+### Actualizar/Crear Secret 1:
+- **Name:** `CF_API_TOKEN`
+- **Value:** [Pega el token que copiaste con los permisos correctos]
+- Si ya existe: Click en el secret → **Update** → Pega el nuevo token
+- Si no existe: Click **"New repository secret"** → Crea el secret
 
-### Agregar Secret 2:
-- **Name:** `CLOUDFLARE_ACCOUNT_ID`
+### Verificar Secret 2:
+- **Name:** `CF_ACCOUNT_ID`
 - **Value:** `df184896be146d6f9dbb801fe0eabca1`
-- Click **"Add secret"**
+- Este debería estar correcto, pero verifícalo
 
 ## Paso 3: ¡Listo!
 
