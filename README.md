@@ -1,6 +1,10 @@
-# 🛒 Tienda Online - E-commerce Moderno
+# 🛒 NOORFLORO - Pisos y Revestimientos
 
-Tienda online completa desarrollada con Next.js, optimizada para performance, accesibilidad y SEO. **Lista para deployar con stack 100% gratuito**.
+Tienda online de pisos y revestimientos desarrollada con Next.js, desplegada en Cloudflare Workers.
+
+**🚀 Deploy automático:** Cada `git push` a `main` despliega automáticamente → [Ver cómo deployar](COMO_DEPLOYAR.md)**
+
+**🌐 Sitio en vivo:** https://noorfloro.foreverargentina.workers.dev/
 
 ## ✨ Características
 
