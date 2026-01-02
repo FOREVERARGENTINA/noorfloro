@@ -26,8 +26,8 @@ jobs:
       - name: Build with OpenNext
         run: npm run pages:build
 
-      - name: Deploy to Cloudflare Pages
-        run: npx wrangler pages deploy .open-next --project-name=noorfloro
+      - name: Deploy to Cloudflare Workers
+        run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
