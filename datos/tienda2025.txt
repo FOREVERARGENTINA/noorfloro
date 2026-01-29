@@ -1,0 +1,277 @@
+Cloudflare Pages + Firebase/Firestore: Arquitectura sugerida (Supabase references removed)
+Stack final
+Frontend: Cloudflare Pages (Next.js 14+)
+Backend/DB: Supabase (PostgreSQL + Auth + Storage + Edge Functions)
+Edge: Cloudflare Workers (webhooks, cache, rate limiting)
+Pagos: Mercado Pago + Mobbex
+Keep-alive: Cron-job.org (ping cada 6 días)
+
+Estructura del proyecto
+/frontend (Cloudflare Pages)
+  ├─ /app (Next.js App Router)
+  ├─ /components (catálogo, carrito, checkout)
+  ├─ /lib/supabase-client.ts
+  └─ /admin (dashboard CRUD productos)
+
+/workers (Cloudflare Workers)
+  ├─ webhook-mercadopago.ts
+  ├─ calculate-shipping.ts
+  └─ rate-limiter.ts
+
+/supabase
+  ├─ /migrations (schema SQL)
+  ├─ /functions (Edge Functions)
+  │   ├─ create-mp-preference
+  │   ├─ send-order-email
+  │   └─ update-inventory
+  └─ /storage (buckets config)
+
+Base de datos (Supabase PostgreSQL)
+sql-- products
+id uuid PRIMARY KEY
+sku varchar UNIQUE
+name varchar
+description text
+price decimal
+stock integer
+images jsonb -- ['url1', 'url2']
+category varchar
+created_at timestamp
+
+-- orders
+id uuid PRIMARY KEY
+customer_id uuid REFERENCES customers
+items jsonb -- [{product_id, qty, price}]
+total decimal
+status varchar -- pending/paid/shipped/delivered
+payment_id varchar -- MP payment ID
+shipping_address jsonb
+created_at timestamp
+
+-- customers
+id uuid PRIMARY KEY (= auth.users.id)
+email varchar
+name varchar
+phone varchar
+addresses jsonb
+created_at timestamp
+```
+
+**Row Level Security (RLS)**:
+- Clientes ven solo sus órdenes
+- Admins acceso total
+- Productos públicos para todos
+
+---
+
+## Flujo completo de compra
+
+### 1. Usuario navega catálogo
+```
+Cloudflare Pages → fetch productos desde Supabase
+└─ Cache: Cloudflare CDN (edge cache)
+```
+
+### 2. Agrega al carrito
+```
+localStorage del browser
+└─ No toca backend hasta checkout
+```
+
+### 3. Checkout
+```
+Frontend → Cloudflare Worker or Firebase Function: create-mp-preference (implement server-side logic to create Mercado Pago preference and persist orders to Firestore)
+└─ Edge Function → Mercado Pago API → devuelve init_point
+└─ Frontend redirect a MP checkout
+```
+
+### 4. Usuario paga en MP
+```
+Mercado Pago procesa pago
+└─ Envía webhook a Cloudflare Worker
+```
+
+### 5. Webhook procesa pago
+```
+Cloudflare Worker recibe POST /webhook/mp
+├─ Valida x-signature (HMAC)
+├─ Consulta estado pago en MP API
+├─ Actualiza order.status = 'paid' en Supabase
+├─ Trigger Supabase → Edge Function: send-order-email
+└─ Edge Function: update-inventory (resta stock)
+```
+
+### 6. Confirmación
+```
+Supabase Edge Function → Resend API → email al cliente
+Frontend polling → actualiza UI con orden confirmada
+
+Panel Admin
+Ruta: /admin (protegida con Supabase Auth)
+Funcionalidades:
+
+Login con email/password (Supabase Auth)
+Dashboard: órdenes del día, revenue, stock bajo
+CRUD productos:
+
+Formulario → Supabase client insert/update
+Upload imágenes → Supabase Storage
+Preview en tiempo real
+
+
+Gestión órdenes:
+
+Listado con filtros (status, fecha)
+Actualizar estado → trigger email automático
+Exportar CSV
+
+
+Configuración:
+
+API keys (MP, Mobbex)
+Zonas de envío
+Cupones descuento
+
+
+
+Código simplificado:
+typescript// Admin protegido
+const { data: { user } } = await supabase.auth.getUser()
+if (!user?.role === 'admin') redirect('/login')
+
+// Crear producto
+await supabase.from('products').insert({
+  name, price, stock, images
+})
+
+// Upload imagen
+const { data } = await supabase.storage
+  .from('products')
+  .upload(`${productId}.jpg`, file)
+
+Cloudflare Workers (Edge Functions)
+Worker 1: Webhook Mercado Pago
+typescript// worker-webhook-mp.ts
+export default {
+  async fetch(request) {
+    // Validar x-signature
+    const isValid = validateMPWebhook(request)
+    if (!isValid) return new Response('Invalid', { status: 401 })
+    
+    // Consultar pago en MP
+    const payment = await fetchMPPayment(paymentId)
+    
+    // Actualizar en Supabase
+    await supabase.from('orders')
+      .update({ status: payment.status })
+      .eq('payment_id', paymentId)
+    
+    return new Response('OK')
+  }
+}
+Worker 2: Rate limiting
+typescript// Protege contra bots
+const RATE_LIMIT = 100 // requests por min
+// Usa Cloudflare KV para tracking
+Worker 3: Cálculo envíos
+typescript// Calcula costo OCA según CP
+// Cache respuestas en KV
+
+Integración Mercado Pago
+En Supabase Edge Function:
+typescript// /supabase/functions/create-mp-preference/index.ts
+import { MercadoPagoConfig, Preference } from 'mercadopago'
+
+const client = new MercadoPagoConfig({ 
+  accessToken: Deno.env.get('MP_ACCESS_TOKEN') 
+})
+
+const preference = new Preference(client)
+const response = await preference.create({
+  items: [{
+    title: 'Orden #123',
+    quantity: 1,
+    unit_price: 15000
+  }],
+  back_urls: {
+    success: 'https://tutienda.com/success',
+    failure: 'https://tutienda.com/failure'
+  },
+  notification_url: 'https://webhook.tudominio.workers.dev/mp'
+})
+
+return new Response(JSON.stringify(response))
+
+Keep-alive automático
+Cron-job.org config:
+
+URL: https://tuproyecto.supabase.co/rest/v1/products?limit=1&apikey=TU_ANON_KEY
+Frecuencia: 0 0 */6 * * (cada 6 días a medianoche)
+Timeout: 30 seg
+Email alert si falla
+
+Alternativa en Cloudflare Worker:
+typescript// Scheduled Worker (trigger cada 6 días)
+export default {
+  async scheduled(event, env, ctx) {
+    await fetch('https://tuproyecto.supabase.co/rest/v1/products?limit=1', {
+      headers: { apikey: env.SUPABASE_ANON_KEY }
+    })
+  }
+}
+
+Deployment
+1. Supabase:
+bash# Setup local
+supabase init
+supabase start
+
+# Deploy migrations
+supabase db push
+
+# Deploy Edge Functions
+supabase functions deploy create-mp-preference
+2. Cloudflare Pages:
+bash# Conectar repo GitHub
+# Auto-deploy en cada push a main
+# Build command: npm run build
+# Output: .next
+3. Cloudflare Workers:
+bashwrangler deploy worker-webhook-mp.ts
+# Configura routes en dashboard
+
+Costos reales
+Mes 1-6 (gratis):
+
+Cloudflare: $0
+Supabase: $0
+Cron-job: $0
+Resend: $0 (3K emails/mes)
+Total: $0/mes
+
+Escalabilidad:
+
+5GB bandwidth Supabase = ~2,500 visitas/mes
+500MB DB = ~50K productos pequeños
+Al superar → Supabase Pro $25/mes
+
+Breaking point: ~1,000 órdenes/mes o 5K visitas/mes
+
+Ventajas sobre Render + Neon
+✅ Bandwidth ilimitado en Cloudflare
+✅ Auth OAuth integrado (Google, Facebook)
+✅ Real-time subscriptions (stock updates live)
+✅ Storage integrado (no necesitás Cloudinary)
+✅ Edge Functions más cerca de usuarios
+✅ Dashboard Supabase superior a CLI Neon
+Único trade-off: Necesitás cron job (5 min setup)
+
+Próximos pasos
+
+Crear cuenta Supabase + proyecto
+Setup schema SQL (migrations)
+Crear app Next.js + Supabase client
+Deploy a Cloudflare Pages
+Configurar Worker webhook MP
+Setup cron keep-alive
+Testing con MP sandbox

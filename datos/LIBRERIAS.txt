@@ -1,0 +1,64 @@
+# Comparativa de Librerías y Técnicas de Diseño Web Moderno
+
+| Librería/Técnica | Para qué sirve | Cuándo usarla | Peso/Performance | Curva de aprendizaje | Alternativas |
+|------------------|----------------|---------------|------------------|---------------------|--------------|
+| **GSAP** | Animaciones complejas, timeline control, scroll effects | Animaciones profesionales, control preciso del timing | ~50KB (ligero) | Media-Alta | Framer Motion (React), CSS Animations |
+| **ScrollTrigger** (plugin GSAP) | Animaciones basadas en scroll position | Parallax, pin sections, scroll-based reveals | +8KB | Media | Locomotive Scroll, AOS |
+| **Locomotive Scroll** | Smooth scroll + parallax integrado | One-page sites, portfolios creativos | ~30KB | Baja-Media | GSAP ScrollTrigger, CSS scroll-behavior |
+| **Three.js** | Gráficos 3D en el browser | Productos 3D, backgrounds inmersivos, experiencias interactivas | ~600KB (pesado) | Alta | Babylon.js, PlayCanvas |
+| **Lottie** | Animaciones vectoriales (JSON desde After Effects) | Loaders, iconos animados, ilustraciones con movimiento | ~60KB + archivos JSON | Baja | GIF, CSS animations, SVG + GSAP |
+| **Framer Motion** | Animaciones declarativas para React | Proyectos React que necesitan animaciones fluidas | ~50KB | Baja-Media | GSAP (más potente), React Spring |
+| **AOS (Animate On Scroll)** | Animaciones simples al hacer scroll | Proyectos rápidos, animaciones básicas de entrada | ~10KB (muy ligero) | Muy Baja | GSAP ScrollTrigger, Intersection Observer |
+| **Swiper** | Carruseles modernos touch-friendly | Sliders de imágenes, testimonios, productos | ~40KB | Baja | Splide, Glide.js, Bootstrap carousel |
+| **Particles.js / tsParticles** | Sistemas de partículas animadas | Backgrounds tech, efectos de nieve/estrellas | ~20-40KB | Baja | Canvas nativo, Three.js |
+| **Splitting.js** | Divide texto en spans para animar | Efectos tipográficos letra por letra | ~5KB (muy ligero) | Baja | Hacerlo manualmente con JS |
+| **Tilt.js** | Efecto 3D hover en elementos | Cards interactivas, elementos destacados | ~5KB | Muy Baja | CSS transform + JS manual |
+| **Barba.js** | Transiciones entre páginas (SPA feel) | Multi-page sites que quieren sentirse como SPA | ~15KB | Media | PJAX, Turbo (Rails), Next.js transitions |
+| **Intersection Observer API** | Detectar visibilidad de elementos | Lazy loading, trigger animations, infinite scroll | Nativo (0KB) | Baja | Scroll events (peor performance) |
+| **Rellax.js** | Parallax simple y ligero | Parallax básico sin complejidad | ~2KB (ultra ligero) | Muy Baja | GSAP ScrollTrigger, Locomotive |
+| **Typed.js** | Efecto de escritura de texto | Hero sections, efectos typewriter | ~15KB | Muy Baja | CSS animations, hacerlo manual |
+| **Vanilla Tilt** | Tilt 3D sin dependencias | Hover effects en cards | ~3KB | Muy Baja | CSS 3D transforms |
+| **Plyr** | Reproductor de video customizable | Videos con controles branded | ~30KB | Baja | Video.js, HTML5 video nativo |
+| **SmoothScroll polyfill** | Smooth scroll en navegadores viejos | Compatibilidad cross-browser | ~5KB | Muy Baja | CSS scroll-behavior (nativo moderno) |
+
+---
+
+## Tabla de Uso por Tipo de Proyecto
+
+| Tipo de Proyecto | Librerías Recomendadas | Evitar |
+|------------------|------------------------|--------|
+| **Landing Page Corporativa** | GSAP + ScrollTrigger, Swiper | Three.js, Particles.js, efectos excesivos |
+| **Portfolio Creativo** | GSAP, Locomotive Scroll, Three.js (opcional), Barba.js | AOS (muy básico), Bootstrap animations |
+| **E-commerce** | Swiper, Intersection Observer, lazy loading agresivo | Animaciones pesadas, Locomotive (interfiere con UX) |
+| **Blog/Editorial** | AOS (ligero), Intersection Observer, Plyr | Three.js, animaciones complejas innecesarias |
+| **SaaS/Dashboard** | Framer Motion (si React), Lottie para loaders | Parallax, scroll hijacking |
+| **Sitio Institucional** | GSAP (moderado), Swiper, video backgrounds sutiles | Efectos llamativos, partículas |
+
+---
+
+## Comparativa Performance
+
+| Librería | Impacto en PageSpeed | Mobile-Friendly | SEO Impact |
+|----------|---------------------|-----------------|------------|
+| GSAP | Bajo (si se usa bien) | Excelente | Neutral |
+| Three.js | Alto | Regular (depende implementación) | Puede afectar si no hay fallback |
+| Locomotive Scroll | Medio | Bueno | Puede afectar crawling si mal configurado |
+| Lottie | Bajo-Medio | Excelente | Neutral |
+| AOS | Muy Bajo | Excelente | Neutral |
+| Particles.js | Medio | Regular | Neutral |
+
+---
+
+## Criterios de Selección
+
+**Elegí según:**
+1. **Objetivo del efecto** - ¿Realmente mejora la experiencia o es decorativo?
+2. **Audiencia** - Usuarios jóvenes vs. corporativos vs. mayores
+3. **Performance budget** - Cuánto peso podés agregar sin afectar carga
+4. **Tiempo de desarrollo** - ¿Vale la pena la complejidad?
+5. **Mantenibilidad** - ¿Lo vas a poder actualizar en 6 meses?
+
+**Regla práctica:**
+- Proyectos simples: 1-2 librerías máximo
+- Proyectos complejos: 3-4 librerías bien justificadas
+- Nunca más de 5 librerías de efectos en un mismo proyecto

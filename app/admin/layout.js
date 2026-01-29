@@ -1,27 +1,40 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import AdminNav from '@/components/AdminNav'
-import { isAdminAuthenticated } from '@/lib/auth'
+import { onAdminAuthChanged } from '@/lib/auth'
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
   const pathname = usePathname()
+  const [checkingAuth, setCheckingAuth] = useState(true)
 
   useEffect(() => {
     // Skip authentication check for login page
     if (pathname === '/admin/login') return
 
-    // Check if user is authenticated
-    if (!isAdminAuthenticated()) {
-      router.push('/admin/login')
-    }
+    const unsubscribe = onAdminAuthChanged((user, isAdmin) => {
+      if (!user || !isAdmin) {
+        router.push('/admin/login')
+      }
+      setCheckingAuth(false)
+    })
+
+    return () => unsubscribe()
   }, [pathname, router])
 
   // Don't show nav on login page
   if (pathname === '/admin/login') {
     return children
+  }
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-600">Verificando sesión...</div>
+      </div>
+    )
   }
 
   return (

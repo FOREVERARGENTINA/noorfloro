@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { clearAdminSession } from '@/lib/auth'
+import { logoutAdmin } from '@/lib/auth'
 
 export default function AdminNav() {
   const pathname = usePathname()
@@ -10,8 +10,13 @@ export default function AdminNav() {
 
   const handleLogout = () => {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-      clearAdminSession()
-      router.push('/admin/login')
+      logoutAdmin()
+        .catch((error) => {
+          console.error('Error al cerrar sesión:', error)
+        })
+        .finally(() => {
+          router.push('/admin/login')
+        })
     }
   }
 

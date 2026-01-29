@@ -1,12 +1,31 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
-import { getFeaturedProducts } from '@/lib/products'
+import { getFeaturedProducts } from '@/lib/firebase'
 
 export default function HomePage() {
-  console.log('Hero image path: /images/hero.jpg')
-  const featuredProducts = getFeaturedProducts()
+  const [featuredProducts, setFeaturedProducts] = useState([])
+  const [loadingFeatured, setLoadingFeatured] = useState(true)
+
+  useEffect(() => {
+    const loadFeatured = async () => {
+      try {
+        setLoadingFeatured(true)
+        const products = await getFeaturedProducts(3)
+        setFeaturedProducts(products)
+      } catch (error) {
+        console.error('Error loading featured products:', error)
+      } finally {
+        setLoadingFeatured(false)
+      }
+    }
+
+    loadFeatured()
+  }, [])
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -93,11 +112,26 @@ export default function HomePage() {
               <p className="text-gray-600 text-lg">Los mejores productos seleccionados para ti</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {featuredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {loadingFeatured ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {[0, 1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="h-72 rounded-2xl bg-white shadow-sm animate-pulse"
+                  />
+                ))}
+              </div>
+            ) : featuredProducts.length === 0 ? (
+              <div className="text-center text-gray-600 mb-8">
+                Aun no hay productos destacados.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {featuredProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
 
             <div className="text-center">
               <Link href="/productos" className="btn btn-primary text-lg px-8">

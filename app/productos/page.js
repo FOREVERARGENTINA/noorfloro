@@ -1,13 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
-import { products, categories } from '@/lib/products'
+import { categories } from '@/lib/products'
+import { getProducts } from '@/lib/firebase'
 
 export default function ProductosPage() {
   const [selectedCategory, setSelectedCategory] = useState('todos')
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    loadProducts()
+  }, [])
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true)
+      const productsData = await getProducts()
+      setProducts(productsData)
+    } catch (error) {
+      console.error('Error loading products:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const filteredProducts = selectedCategory === 'todos'
     ? products

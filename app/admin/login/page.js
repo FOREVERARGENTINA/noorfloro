@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { validateAdminCredentials, setAdminSession } from '@/lib/auth'
+import { loginAdmin } from '@/lib/auth'
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -25,14 +25,12 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    if (validateAdminCredentials(formData.email, formData.password)) {
-      setAdminSession()
+    try {
+      await loginAdmin(formData.email, formData.password)
       router.push('/admin')
-    } else {
-      setError('Credenciales incorrectas')
+    } catch (err) {
+      const message = err?.message || 'Error al iniciar sesión'
+      setError(message)
       setLoading(false)
     }
   }
@@ -114,12 +112,8 @@ export default function AdminLoginPage() {
 
           {/* Info */}
           <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded">
-            <p className="text-sm text-blue-800 font-medium mb-2">
-              Credenciales de prueba:
-            </p>
-            <p className="text-xs text-blue-700">
-              Email: admin@tutienda.com<br />
-              Contraseña: admin123
+            <p className="text-sm text-blue-800">
+              Ingresa con el usuario admin creado en Firebase Auth.
             </p>
           </div>
         </div>

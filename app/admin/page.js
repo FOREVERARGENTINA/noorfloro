@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { products } from '@/lib/products'
-import { formatPrice } from '@/lib/products'
+import { formatPrice, getCategoryName } from '@/lib/products'
+import { getProducts } from '@/lib/firebase'
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -12,15 +12,33 @@ export default function AdminDashboard() {
     totalValue: 0,
     outOfStock: 0,
   })
+  const [recentProducts, setRecentProducts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Calculate statistics
-    const totalProducts = products.length
-    const lowStock = products.filter(p => p.stock > 0 && p.stock < 10).length
-    const outOfStock = products.filter(p => p.stock === 0).length
-    const totalValue = products.reduce((sum, p) => sum + (p.price * p.stock), 0)
+    const loadStats = async () => {
+      try {
+        setLoading(true)
+        const productsData = await getProducts()
+        const totalProducts = productsData.length
+        const lowStock = productsData.filter(p => p.stock > 0 && p.stock < 10).length
+        const outOfStock = productsData.filter(p => p.stock === 0).length
+        const totalValue = productsData.reduce((sum, p) => {
+          const price = typeof p.price === 'number' ? p.price : 0
+          const stock = typeof p.stock === 'number' ? p.stock : 0
+          return sum + (price * stock)
+        }, 0)
 
-    setStats({ totalProducts, lowStock, totalValue, outOfStock })
+        setStats({ totalProducts, lowStock, totalValue, outOfStock })
+        setRecentProducts(productsData.slice(0, 5))
+      } catch (error) {
+        console.error('Error loading dashboard stats:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadStats()
   }, [])
 
   return (
@@ -161,43 +179,57 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {products.slice(0, 5).map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-4 text-sm font-medium text-gray-900">
-                    {product.name}
-                  </td>
-                  <td className="px-4 py-4 text-sm text-gray-600">
-                    {product.category === 'tecnologia' ? 'Tecnología' : 'Hogar'}
-                  </td>
-                  <td className="px-4 py-4 text-sm text-gray-900">
-                    {formatPrice(product.price)}
-                  </td>
-                  <td className="px-4 py-4 text-sm">
-                    <span className={`font-medium ${
-                      product.stock === 0 ? 'text-red-600' :
-                      product.stock < 10 ? 'text-orange-600' :
-                      'text-green-600'
-                    }`}>
-                      {product.stock} unidades
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 text-sm">
-                    {product.stock === 0 ? (
-                      <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                        Sin stock
-                      </span>
-                    ) : product.stock < 10 ? (
-                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
-                        Stock bajo
-                      </span>
-                    ) : (
-                      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                        Disponible
-                      </span>
-                    )}
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="px-4 py-6 text-center text-gray-500">
+                    Cargando productos...
                   </td>
                 </tr>
-              ))}
+              ) : recentProducts.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="px-4 py-6 text-center text-gray-500">
+                    Aún no hay productos cargados.
+                  </td>
+                </tr>
+              ) : (
+                recentProducts.map((product) => (
+                  <tr key={product.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-4 text-sm font-medium text-gray-900">
+                      {product.name}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-600">
+                      {getCategoryName(product.category)}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-900">
+                      {formatPrice(product.price)}
+                    </td>
+                    <td className="px-4 py-4 text-sm">
+                      <span className={`font-medium ${
+                        product.stock === 0 ? 'text-red-600' :
+                        product.stock < 10 ? 'text-orange-600' :
+                        'text-green-600'
+                      }`}>
+                        {product.stock} unidades
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-sm">
+                      {product.stock === 0 ? (
+                        <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                          Sin stock
+                        </span>
+                      ) : product.stock < 10 ? (
+                        <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
+                          Stock bajo
+                        </span>
+                      ) : (
+                        <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                          Disponible
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

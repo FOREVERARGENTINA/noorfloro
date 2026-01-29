@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { products as initialProducts, categories, formatPrice, getCategoryName } from '@/lib/products'
+import { categories, formatPrice, getCategoryName } from '@/lib/products'
+import { getProducts, getProductById, deleteProduct, updateProduct, setProduct, uploadProductImage } from '@/lib/firebase'
 
 export default function AdminProductsPage() {
-  const [products, setProducts] = useState(initialProducts)
-  const [filteredProducts, setFilteredProducts] = useState(initialProducts)
+  const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('todos')
   const [searchTerm, setSearchTerm] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -18,9 +19,31 @@ export default function AdminProductsPage() {
     price: '',
     stock: '',
     category: 'medias',
-    images: ['https://via.placeholder.com/400x400/0ea5e9/ffffff?text=Producto'],
+    images: [],
     featured: false,
   })
+  const [imageFiles, setImageFiles] = useState([])
+  const [imagePreviews, setImagePreviews] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  // Load products from Firestore on mount
+  useEffect(() => {
+    loadProducts()
+  }, [])
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true)
+      const productsData = await getProducts()
+      setProducts(productsData)
+      setFilteredProducts(productsData)
+    } catch (error) {
+      console.error('Error loading products:', error)
+      alert('Error al cargar los productos')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     filterProducts()
@@ -53,63 +76,152 @@ export default function AdminProductsPage() {
     }))
   }
 
+  const slugify = (value) => {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '')
+  }
+
   const handleEdit = (product) => {
     setEditingProduct(product)
     setFormData({
       name: product.name,
       description: product.description,
-      price: product.price.toString(),
+      price: product.price !== null && product.price !== undefined ? product.price.toString() : '',
       stock: product.stock.toString(),
       category: product.category,
-      images: product.images,
+      images: product.images && product.images.length ? product.images : [],
       featured: product.featured,
     })
+    setImageFiles([])
+    setImagePreviews(product.images && product.images.length ? product.images : [])
     setShowModal(true)
   }
 
-  const handleDelete = (productId) => {
+  const handleDelete = async (productId) => {
     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-      setProducts(prev => prev.filter(p => p.id !== productId))
-      alert('Producto eliminado correctamente')
+      try {
+        await deleteProduct(productId)
+        setProducts(prev => prev.filter(p => p.id !== productId))
+        alert('Producto eliminado correctamente')
+      } catch (error) {
+        console.error('Error deleting product:', error)
+        alert('Error al eliminar el producto')
+      }
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files || [])
+
+    if (imagePreviews.length > 0) {
+      imagePreviews.forEach((preview) => {
+        if (preview.startsWith('blob:')) {
+          URL.revokeObjectURL(preview)
+        }
+      })
+    }
+
+    if (files.length === 0) {
+      setImageFiles([])
+      setImagePreviews(formData.images || [])
+      return
+    }
+
+    const invalidFile = files.find(file => !file.type.startsWith('image/'))
+    if (invalidFile) {
+      alert('Selecciona solo archivos de imagen válidos.')
+      return
+    }
+
+    setImageFiles(files)
+    setImagePreviews(files.map(file => URL.createObjectURL(file)))
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const productData = {
-      id: editingProduct ? editingProduct.id : Date.now(),
-      name: formData.name,
-      description: formData.description,
-      price: parseInt(formData.price),
-      stock: parseInt(formData.stock),
-      category: formData.category,
-      images: formData.images,
-      featured: formData.featured,
-    }
+    try {
+      const parsedPrice = formData.price === '' ? null : Number(formData.price)
+      const existingImages = formData.images || []
 
-    if (editingProduct) {
-      // Update existing product
-      setProducts(prev => prev.map(p => p.id === editingProduct.id ? productData : p))
-      alert('Producto actualizado correctamente')
-    } else {
-      // Add new product
-      setProducts(prev => [...prev, productData])
-      alert('Producto agregado correctamente')
-    }
+      if (imageFiles.length === 0 && existingImages.length === 0) {
+        alert('Por favor, sube al menos una imagen del producto.')
+        return
+      }
 
-    // Reset form
-    setShowModal(false)
-    setEditingProduct(null)
-    setFormData({
-      name: '',
-      description: '',
-      price: '',
-      stock: '',
-      category: 'medias',
-      images: ['https://via.placeholder.com/400x400/0ea5e9/ffffff?text=Producto'],
-      featured: false,
-    })
+      const slug = editingProduct ? editingProduct.id : slugify(formData.name)
+
+      if (!editingProduct) {
+        const existing = await getProductById(slug)
+        if (existing) {
+          alert('Ya existe un producto con ese nombre. Cambia el nombre o edita el existente.')
+          return
+        }
+      }
+
+      let imageUrls = existingImages
+      if (imageFiles.length > 0) {
+        imageUrls = await Promise.all(
+          imageFiles.map(async (file) => {
+            const safeName = String(Date.now()) + '-' + file.name
+            const cleanedName = safeName.replace(/[^a-zA-Z0-9._-]/g, '-')
+            return await uploadProductImage(file, cleanedName)
+          })
+        )
+      }
+
+      const productData = {
+        slug,
+        name: formData.name,
+        description: formData.description,
+        price: Number.isNaN(parsedPrice) ? null : parsedPrice,
+        stock: parseInt(formData.stock),
+        category: formData.category,
+        images: imageUrls,
+        featured: formData.featured,
+      }
+
+      if (editingProduct) {
+        // Update existing product
+        await updateProduct(editingProduct.id, productData)
+        setProducts(prev => prev.map(p => p.id === editingProduct.id ? { ...productData, id: editingProduct.id } : p))
+        alert('Producto actualizado correctamente')
+      } else {
+        // Add new product
+        await setProduct(slug, productData)
+        setProducts(prev => [...prev, { ...productData, id: slug }])
+        alert('Producto agregado correctamente')
+      }
+
+      // Reset form
+      setShowModal(false)
+      setEditingProduct(null)
+      setFormData({
+        name: '',
+        description: '',
+        price: '',
+        stock: '',
+        category: 'medias',
+        images: [],
+        featured: false,
+      })
+      if (imagePreviews.length > 0) {
+        imagePreviews.forEach((preview) => {
+          if (preview.startsWith('blob:')) {
+            URL.revokeObjectURL(preview)
+          }
+        })
+      }
+      setImageFiles([])
+      setImagePreviews([])
+    } catch (error) {
+      console.error('Error saving product:', error)
+      alert('Error al guardar el producto')
+    }
   }
 
   const openNewProductModal = () => {
@@ -120,9 +232,18 @@ export default function AdminProductsPage() {
       price: '',
       stock: '',
       category: 'medias',
-      images: ['https://via.placeholder.com/400x400/0ea5e9/ffffff?text=Producto'],
+      images: [],
       featured: false,
     })
+    if (imagePreviews.length > 0) {
+      imagePreviews.forEach((preview) => {
+        if (preview.startsWith('blob:')) {
+          URL.revokeObjectURL(preview)
+        }
+      })
+    }
+    setImageFiles([])
+    setImagePreviews([])
     setShowModal(true)
   }
 
@@ -144,6 +265,12 @@ export default function AdminProductsPage() {
           <span>Agregar Producto</span>
         </button>
       </div>
+
+      {loading && (
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -310,6 +437,9 @@ export default function AdminProductsPage() {
                     className="input"
                     required
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    URL: /producto/{editingProduct ? editingProduct.id : slugify(formData.name || '')}
+                  </p>
                 </div>
 
                 <div>
@@ -335,8 +465,8 @@ export default function AdminProductsPage() {
                       value={formData.price}
                       onChange={handleInputChange}
                       className="input"
-                      required
                       min="0"
+                      placeholder="Opcional"
                     />
                   </div>
 
@@ -369,34 +499,34 @@ export default function AdminProductsPage() {
                     ))}
                   </select>
                 </div>
-
                 <div>
-                  <label htmlFor="imageUrl" className="label">URL de la Imagen</label>
+                  <label htmlFor="imageFiles" className="label">Imágenes del Producto</label>
                   <input
-                    type="url"
-                    id="imageUrl"
-                    name="imageUrl"
-                    value={formData.images[0]}
-                    onChange={(e) => setFormData(prev => ({ ...prev, images: [e.target.value] }))}
+                    type="file"
+                    id="imageFiles"
+                    name="imageFiles"
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageChange}
                     className="input"
-                    placeholder="https://ejemplo.com/imagen.jpg"
-                    required
+                    required={imageFiles.length === 0 && (!formData.images || formData.images.length === 0)}
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    Puedes usar placeholders: <a href="https://via.placeholder.com/400" target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">via.placeholder.com</a> o subir tu imagen a <a href="https://imgur.com" target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">imgur.com</a>
+                    Sube una o más imágenes (JPG, PNG o WebP). Tamaño recomendado: hasta 2MB cada una.
                   </p>
-                  {formData.images[0] && (
+                  {(imagePreviews.length > 0 || (formData.images && formData.images.length > 0)) && (
                     <div className="mt-2">
-                      <p className="text-xs text-gray-600 mb-1">Vista previa:</p>
-                      <div className="relative w-32 h-32 bg-gray-100 rounded border border-gray-200">
-                        <img
-                          src={formData.images[0]}
-                          alt="Preview"
-                          className="w-full h-full object-cover rounded"
-                          onError={(e) => {
-                            e.target.src = 'https://via.placeholder.com/400x400/e2e8f0/64748b?text=Error+al+cargar'
-                          }}
-                        />
+                      <p className="text-xs text-gray-600 mb-2">Vista previa:</p>
+                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                        {(imagePreviews.length > 0 ? imagePreviews : formData.images).map((src, index) => (
+                          <div key={`${src}-${index}`} className="relative w-24 h-24 bg-gray-100 rounded border border-gray-200">
+                            <img
+                              src={src}
+                              alt={`Preview ${index + 1}`}
+                              className="w-full h-full object-cover rounded"
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}

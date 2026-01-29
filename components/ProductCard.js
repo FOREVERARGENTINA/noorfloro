@@ -6,17 +6,18 @@ import { formatPrice } from '@/lib/products'
 
 export default function ProductCard({ product }) {
   const waNumber = '5491162961526'
+  const productSlug = product.slug || product.id
 
   const getWaLink = () => {
     const site = process.env.NEXT_PUBLIC_SITE_URL || ''
-    const url = `${site.replace(/\/$/, '')}/producto/${product.id}`
+    const url = `${site.replace(/\/$/, '')}/producto/${productSlug}`
     const text = `Hola, quisiera consultar por el producto "${product.name}". ${url}`
     return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`
   }
 
   return (
     <article className="card group h-full flex flex-col">
-      <Link href={`/producto/${product.id}`} className="block flex-1">
+      <Link href={`/producto/${productSlug}`} className="block flex-1">
         <div className="relative aspect-[4/3] bg-gray-200 overflow-hidden">
           <Image
             src={product.images[0]}

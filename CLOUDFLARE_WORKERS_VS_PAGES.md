@@ -78,7 +78,7 @@ https://noorfloro.pages.dev/
     "dev": "next dev",
     "build": "next build",
     "pages:build": "npx @opennextjs/cloudflare build",
-    "pages:dev": "wrangler pages dev .open-next --compatibility-flag=nodejs_compat",
+    "pages:dev": "wrangler dev .open-next/worker.js --compatibility-flag=nodejs_compat",
     "pages:deploy": "npm run pages:build && wrangler deploy"
   }
 }
