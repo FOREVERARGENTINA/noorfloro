@@ -4,8 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Image optimization configuration
-  // Note: Cloudflare Workers doesn't support Next.js Image Optimization API
-  // Images will be served unoptimized, or you can use Cloudflare Images
+  // Images are served unoptimized for compatibility
   images: {
     unoptimized: true,
     remotePatterns: [
