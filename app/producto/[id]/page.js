@@ -234,10 +234,12 @@ export default function ProductDetailPage() {
         <div className="container-custom relative py-8 lg:py-12">
           <button
             onClick={() => router.back()}
-            className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900"
+            className="mb-6 inline-flex items-center gap-3 px-5 py-3 bg-white hover:bg-gray-50 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 group"
           >
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">&larr;</span>
-            Volver
+            <svg className="w-6 h-6 text-gray-600 group-hover:text-noorfloro-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span className="text-base font-semibold text-gray-700 group-hover:text-gray-900">Volver</span>
           </button>
 
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
@@ -247,9 +249,13 @@ export default function ProductDetailPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Galeria</p>
                   <p className="text-sm text-slate-600">Imagenes del producto</p>
                 </div>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-                  {images.length || 0} fotos
-                </span>
+                <button
+                  onClick={() => openLightbox(activeImageIndex)}
+                  className="rounded-full bg-[#FA8F01] hover:bg-[#E85A2B] px-4 py-2 text-xs font-semibold text-white transition-all shadow-md hover:shadow-lg cursor-pointer"
+                  title="Ver galería completa"
+                >
+                  {images.length || 0} {images.length === 1 ? 'foto' : 'fotos'}
+                </button>
               </div>
 
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-[0_10px_30px_-8px_rgba(2,6,23,0.12)]">

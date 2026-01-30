@@ -4,57 +4,7 @@ import { useState } from 'react'
 import { formatPrice } from '@/lib/products'
 
 // Mock orders data
-const mockOrders = [
-  {
-    id: 1,
-    orderNumber: 'ORD-2025-001',
-    customer: {
-      name: 'Juan Pérez',
-      email: 'juan@email.com',
-      phone: '11 1234-5678',
-    },
-    items: [
-      { name: 'Producto Premium 1', quantity: 2, price: 12999 },
-      { name: 'Producto Destacado 2', quantity: 1, price: 8499 },
-    ],
-    total: 34497,
-    status: 'pending',
-    createdAt: '2025-01-10 14:30',
-    shippingAddress: 'Av. Corrientes 1234, CABA',
-  },
-  {
-    id: 2,
-    orderNumber: 'ORD-2025-002',
-    customer: {
-      name: 'María García',
-      email: 'maria@email.com',
-      phone: '11 9876-5432',
-    },
-    items: [
-      { name: 'Producto Deluxe 5', quantity: 1, price: 24999 },
-    ],
-    total: 24999,
-    status: 'processing',
-    createdAt: '2025-01-10 15:45',
-    shippingAddress: 'Calle Falsa 123, Rosario',
-  },
-  {
-    id: 3,
-    orderNumber: 'ORD-2025-003',
-    customer: {
-      name: 'Carlos López',
-      email: 'carlos@email.com',
-      phone: '11 5555-4444',
-    },
-    items: [
-      { name: 'Producto Básico 4', quantity: 3, price: 5999 },
-    ],
-    total: 17997,
-    status: 'completed',
-    createdAt: '2025-01-09 10:20',
-    shippingAddress: 'Av. Libertador 5678, CABA',
-  },
-]
+const mockOrders = []
 
 const statusColors = {
   pending: { bg: 'bg-yellow-100', text: 'text-yellow-800', label: 'Pendiente' },

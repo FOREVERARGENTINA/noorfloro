@@ -196,14 +196,14 @@ Ejecutar migraciones
 
 | Capa      | Tecnología                    | Estado | Notas                          |
 |-----------|-------------------------------|--------|--------------------------------|
-| Frontend  | Next.js 15 + React 18         | ✅     | App Router, Server Components  |
+| Frontend  | Next.js 15 + React 18         | ✅     | App Router, Client Components  |
 | Estilos   | Tailwind CSS 4.x              | ✅     | Configuración personalizada    |
 | Backend   | Firebase (serverless)         | ✅     | Sin backend custom             |
 | DB        | Firestore                     | ✅     | Colección: products            |
 | Storage   | Firebase Storage              | ✅     | Imágenes bajo /products/       |
-| Auth      | Firebase Auth                 | ⚠️     | Configurado, no implementado   |
-| Hosting   | Cloudflare Workers + OpenNext | ✅     | Edge computing                 |
-| Deploy    | Cloudflare Workers (OpenNext) | ✅     | npm run pages:build + wrangler |
+| Auth      | Firebase Auth                 | ✅     | Login admin implementado       |
+| Hosting   | Vercel                        | ✅     | Edge Network, SSR automático   |
+| Deploy    | Vercel CLI                    | ✅     | npx vercel --prod              |
 👥 Roles y Permisos
 
 | Rol       | Lectura     | Escritura   | Admin Panel | Deploy     |

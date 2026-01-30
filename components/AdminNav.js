@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { logoutAdmin } from '@/lib/auth'
 
@@ -31,11 +32,9 @@ export default function AdminNav() {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/admin" className="flex items-center space-x-2 text-xl font-bold text-sky-600">
-            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-            </svg>
-            <span>Admin Panel</span>
+          <Link href="/admin" className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded">
+            <img src="/images/logo.png" alt="NOORFLORO" className="h-10 w-auto" />
+            <span className="text-xs text-gray-500">Administración</span>
           </Link>
 
           {/* Navigation */}
@@ -61,7 +60,7 @@ export default function AdminNav() {
 
             {/* Store Link */}
             <Link
-              href="/"
+              href="/productos"
               className="flex items-center space-x-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
               target="_blank"
             >

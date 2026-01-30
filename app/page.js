@@ -88,7 +88,7 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold mb-2">Pago Seguro</h3>
-                <p className="text-gray-600">Integración con Mercado Pago para pagos 100% seguros</p>
+                <p className="text-gray-600">Después de contactarnos, comprá seguro con Mercado Pago</p>
               </div>
 
               <div className="text-center">
