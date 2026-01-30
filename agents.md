@@ -106,6 +106,23 @@ El agente SIEMPRE frena y consulta en estos casos.
 2. Flaggear como "requiere asesoría legal"
 3. No sugerir workarounds
 
+6. [ZONA ROJA 6 – Compatibilidad de Plataforma]
+❌ Prohibido sin verificar:
+- Cambiar de plataforma de hosting (Vercel → otra)
+- Usar Firebase SDK en entornos edge/Workers que no lo soporten
+- Migrar a serverless platforms sin confirmar compatibilidad de librerías
+
+✅ Debe hacer:
+1. Verificar compatibilidad de Firebase SDK con runtime target
+2. Si Firebase Client SDK: requiere Node.js runtime o browser (✅ Vercel, ❌ Cloudflare Workers)
+3. Documentar limitaciones conocidas antes de proponer migración
+
+**Lección aprendida (2026-01-29):**
+- Firebase Client SDK usa eval() internamente
+- Cloudflare Workers bloquea eval() por seguridad
+- Vercel soporta Firebase SDK sin modificaciones
+- Antes de migrar: confirmar compatibilidad de SDKs con runtime
+
 ⚠️ Regla de Incompletitud Crítica
 
 Si una sección marcada con ⏳ afecta directamente una decisión actual, el agente debe:
@@ -126,16 +143,26 @@ El agente no debe completar vacíos críticos por inferencia.
 - 5GB almacenamiento → Miles de imágenes
 - 10GB transfer/mes
 
-## Cloudflare Workers (Free Tier)
-- 100K requests/día
-- Sin límite de bandwidth
+## Vercel (Hobby Plan - Gratis)
+- 100GB bandwidth/mes
+- Unlimited requests
+- 100 deployments/día
+- Serverless Functions: 100GB-Hrs compute time
+- Edge Network global
+- Automatic SSL
+
+**Límites relevantes:**
+- Serverless Function timeout: 10s (suficiente para este proyecto)
+- Max file size: 50MB (más que suficiente)
+- Build time: 45 min (Next.js build toma ~1 min)
 
 ## Antes de agregar funcionalidad nueva:
 1. ¿Cuántas lecturas/escritas a Firestore genera por usuario?
 2. ¿Se puede cachear en client-side?
 3. ¿Vale la pena para el negocio?
+4. ¿El tiempo de ejecución excede 10s? (poco probable)
 
-Si agrega >1,000 ops/día → consultar primero
+Si agrega >1,000 ops/día a Firestore → consultar primero
 
 🎯 Rol y Límites del Agente
 Puede hacer (sin confirmar)
@@ -271,11 +298,18 @@ El agente prepara, el humano ejecuta
 npm run dev                  # Servidor local :3000
 ```
 
-## Build & Deploy
+## Build & Deploy a Vercel
 ```bash
-npm run build               # Build Next.js
-npm run pages:build         # Build para Cloudflare
-npm run pages:deploy        # Deploy a Cloudflare Workers (ver scripts)
+npm run build               # Build Next.js local
+npx vercel                  # Deploy a preview (staging)
+npx vercel --prod           # Deploy a producción
+```
+
+## Vercel - Gestión de Variables de Entorno
+```bash
+npx vercel env ls                                    # Listar variables
+echo "valor" | npx vercel env add VARIABLE production # Agregar variable
+npx vercel env pull                                   # Descargar .env.local
 ```
 
 ## Firebase
@@ -285,6 +319,9 @@ firebase deploy --only firestore:rules  # Actualizar reglas
 ```
 
 ⚠️ IMPORTANTE: El agente NUNCA ejecuta deploy automáticamente
+
+## Nota sobre Cloudflare Workers
+El proyecto fue migrado de Cloudflare Workers a Vercel el 2026-01-29 debido a incompatibilidad del Firebase SDK con el runtime de Workers (error eval()). Los comandos `npm run pages:build` y `npm run pages:deploy` ya no se usan.
 
 🎯 Contexto de Dominio
 
@@ -306,15 +343,16 @@ firebase deploy --only firestore:rules  # Actualizar reglas
 
 ✅ Checklist Pre-Deploy
 
-Antes de `npm run pages:deploy`:
+Antes de `npx vercel --prod`:
 
 ☐ npm run build ejecutado sin errores
 ☐ Firestore rules actualizadas si cambiaron
 ☐ Sin console.log en producción
 ☐ Imágenes optimizadas (<500KB cada una)
-☐ Variables de entorno configuradas en Cloudflare
+☐ Variables de entorno configuradas en Vercel (npx vercel env ls)
 ☐ Probado en local con npm run dev
 ☐ URLs de Firebase Storage permitidas en next.config.js
+☐ Probado en preview con `npx vercel` antes de producción
 ☐ Aprobación del dueño del proyecto
 
 📝 Cómo usar este template
@@ -342,6 +380,10 @@ Este documento NO es Un README Un tutorial Documentación exhaustiva Este docume
 Regla de oro:
 Si algo no cambia decisiones del agente, no va acá.
 
-Última actualización: 2026-01-28
-Versión: v1.0 (completado para NOORFLORO)
+Última actualización: 2026-01-29
+Versión: v1.1 (migración a Vercel completada)
 Estado: ✅ Operativo y actualizado
+
+## Changelog
+- **v1.1 (2026-01-29):** Migración exitosa de Cloudflare Workers a Vercel. Actualizado stack técnico, comandos de deploy, y agregada ZONA ROJA 6 sobre compatibilidad de plataforma.
+- **v1.0 (2026-01-28):** Versión inicial completada para NOORFLORO.

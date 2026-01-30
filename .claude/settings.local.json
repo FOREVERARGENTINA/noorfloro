@@ -30,7 +30,13 @@
       "Bash(timeout /t 5)",
       "Bash(git log:*)",
       "Bash(npx vercel:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git rm:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(npm run build:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
