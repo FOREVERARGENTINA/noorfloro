@@ -8,10 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:products": "node scripts/migrate_products_to_firestore.js",
-    "pages:build": "npx @opennextjs/cloudflare build",
-    "pages:dev": "wrangler dev .open-next/worker.js --compatibility-flag=nodejs_compat",
-    "pages:deploy": "npm run pages:build && wrangler deploy"
+    "migrate:products": "node scripts/migrate_products_to_firestore.js"
   },
   "keywords": [],
   "author": "",
@@ -29,8 +26,5 @@
     "react-dom": "18.3.1",
     "tailwindcss": "^4.1.17"
   },
-  "devDependencies": {
-    "@opennextjs/cloudflare": "1.14.7",
-    "wrangler": "^4.56.0"
-  }
+  "devDependencies": {}
 }
