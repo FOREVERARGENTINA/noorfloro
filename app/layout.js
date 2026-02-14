@@ -1,4 +1,5 @@
 import './globals.css'
+import Script from 'next/script'
 
 export const metadata = {
   metadataBase: new URL('https://noorfloro.com.ar'),
@@ -51,6 +52,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-SPY6DL688C"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-SPY6DL688C');
+          `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
