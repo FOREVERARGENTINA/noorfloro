@@ -5,7 +5,7 @@ No incluye carrito ni pagos.
 
 ## Stack
 - Next.js + Tailwind
-- Cloudflare Workers (OpenNext)
+- Vercel (hosting)
 - Firebase Firestore + Storage
 
 ## Por donde empezar

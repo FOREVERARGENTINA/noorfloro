@@ -16,61 +16,70 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <article className="card group h-full flex flex-col">
+    <article className="group bg-white rounded-2xl border border-gray-100 hover:border-[#FA8F01]/30 hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden">
+
       <Link href={`/producto/${productSlug}`} className="block flex-1">
-        <div className="relative aspect-[4/3] bg-gray-200 overflow-hidden">
+        {/* Image */}
+        <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
           <Image
             src={product.images[0]}
             alt={`Imagen de ${product.name}`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
           {product.stock < 10 && product.stock > 0 && (
-            <span className="absolute top-2 right-2 bg-warning text-white text-xs font-bold px-2 py-1 rounded" aria-label={`Solo quedan ${product.stock} unidades`}>
+            <span className="absolute top-2.5 right-2.5 text-white text-[10px] font-bold px-2 py-1 rounded-lg" style={{ background: '#FA8F01' }}>
               ¡Últimas {product.stock}!
             </span>
           )}
           {product.stock === 0 && (
-            <span className="absolute top-2 right-2 bg-error text-white text-xs font-bold px-2 py-1 rounded">
+            <span className="absolute top-2.5 right-2.5 bg-gray-700 text-white text-[10px] font-bold px-2 py-1 rounded-lg">
               Sin stock
             </span>
           )}
         </div>
 
-        <div className="p-6">
-          <h3 className="font-semibold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-sky-600 transition-colors">
+        {/* Info */}
+        <div className="p-4">
+          <h3 className="font-semibold text-[15px] text-gray-900 mb-1.5 line-clamp-2 group-hover:text-[#FA8F01] transition-colors duration-200 leading-snug">
             {product.name}
           </h3>
-
-          <p className="text-gray-600 text-base mb-4 line-clamp-2">
+          <p className="text-gray-500 text-xs mb-3 line-clamp-2 leading-relaxed">
             {product.description}
           </p>
-
-          <div className="flex items-center justify-between">
-            <span className="text-3xl font-bold text-sky-600">
+          {product.price !== null && product.price !== undefined && !Number.isNaN(Number(product.price)) && (
+            <span className="text-xl font-bold text-[#FA8F01]">
               {formatPrice(product.price)}
             </span>
-          </div>
+          )}
         </div>
       </Link>
 
-      <div className="px-6 pb-6">
+      {/* CTA */}
+      <div className="px-4 pb-4">
         {product.stock === 0 ? (
-          <button className="btn w-full py-3 bg-gray-300 text-gray-500 cursor-not-allowed" disabled aria-label={`${product.name} sin stock`}>Sin stock</button>
+          <button
+            className="btn w-full text-sm bg-gray-100 text-gray-400 cursor-not-allowed"
+            style={{ boxShadow: 'none' }}
+            disabled
+          >
+            Sin stock
+          </button>
         ) : (
           <a
             href={getWaLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary w-full py-3"
+            className="btn btn-primary w-full text-sm"
             aria-label={`Consultar por ${product.name} vía WhatsApp`}
           >
-            Consultar por este producto
+            Consultar por WhatsApp
           </a>
         )}
       </div>
+
     </article>
   )
 }

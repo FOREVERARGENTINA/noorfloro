@@ -8,7 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:products": "node scripts/migrate_products_to_firestore.js"
+    "migrate:products": "node scripts/migrate_products_to_firestore.js",
+    "check:encoding": "node scripts/check-encoding.js",
+    "fix:encoding": "node scripts/fix-encoding.js",
+    "fix:encoding:apply": "node scripts/fix-encoding.js --apply",
+    "prebuild": "node scripts/check-encoding.js"
   },
   "keywords": [],
   "author": "",

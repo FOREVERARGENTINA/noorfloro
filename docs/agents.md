@@ -239,9 +239,9 @@ Ejecutar migraciones
 | Admin     | ✅ todo     | ✅ products | ✅          | ⚠️ Manual  |
 
 **Usuario Admin:**
-- Email: [email de la dueña - completar cuando se cree]
-- UID: [completar cuando se cree en Firebase Auth]
-- Custom claim: `admin: true` en Firestore Rules
+- Email: Noorfloro23@hotmail.com
+- UID: YBT34UPkjUXABedYVUywzKHL0tz1
+- Custom claim: `admin: true` en Firestore Rules (ASIGNADO ✅)
 🗄️ Modelo de Datos
 
 ## Colección: products

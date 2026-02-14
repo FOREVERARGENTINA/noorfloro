@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  metadataBase: new URL('https://www.noorfloro.com.ar'),
+  metadataBase: new URL('https://noorfloro.com.ar'),
   title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
   description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos para pared. Envíos a todo el país.',
   keywords: ['pisos flotantes', 'pisos vinílicos', 'baldosas autoadhesivas', 'césped sintético', 'alfombras', 'revestimientos', 'noorfloro'],
@@ -12,15 +12,16 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_AR',
-    url: 'https://www.noorfloro.com.ar',
+    url: 'https://noorfloro.com.ar',
     siteName: 'NOORFLORO',
     title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
     description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos para pared',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: 'NOORFLORO',
       },
     ],
@@ -29,7 +30,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'NOORFLORO - Pisos y Revestimientos de Calidad',
     description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/og-image.png'],
   },
   robots: {
     index: true,
@@ -62,11 +63,11 @@ export default function RootLayout({ children }) {
         <meta name="author" content="Hernan de FrandoWeb" />
 
         {/* Social profile links for verification / metadata */}
-        <link rel="me" href="https://www.instagram.com/noorfloropisos/" />
+        <link rel="me" href="https://www.instagram.com/Noorfloro23" />
         <link rel="me" href="https://www.facebook.com/p/Noorfloro-100070396863140/" />
 
         {/* Open Graph helpers for social platforms */}
-        <meta property="og:see_also" content="https://www.instagram.com/noorfloropisos/" />
+        <meta property="og:see_also" content="https://www.instagram.com/Noorfloro23" />
         <meta property="og:see_also" content="https://www.facebook.com/p/Noorfloro-100070396863140/" />
         <meta property="article:publisher" content="https://www.facebook.com/p/Noorfloro-100070396863140/" />
       </head>

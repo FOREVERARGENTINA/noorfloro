@@ -18,5 +18,5 @@ Abrir: http://localhost:3000
 Nota: este proyecto es catalogo + admin. No hay carrito ni pagos.
 
 ## Deploy
-- `COMO_DEPLOYAR.md` (deploy automatico a Cloudflare Workers)
+- `COMO_DEPLOYAR.md` (deploy automático con git push)
 - `DEPLOYMENT.md` (setup Firebase + variables)

@@ -11,7 +11,7 @@
 
 ## Stack
 - Next.js (App Router) + Tailwind
-- Hosting: Cloudflare Workers (OpenNext)
+- Hosting: Vercel
 - Datos e imagenes: Firebase (Firestore + Storage)
 
 ## Beneficios

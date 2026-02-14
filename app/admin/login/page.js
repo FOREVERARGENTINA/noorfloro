@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
                 className="input"
                 required
                 autoComplete="email"
-                placeholder="admin@tutienda.com"
+                placeholder="admin@noorfloro.com.ar"
               />
             </div>
 
@@ -110,12 +110,6 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          {/* Info */}
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded">
-            <p className="text-sm text-blue-800">
-              Ingresa con el usuario admin creado en Firebase Auth.
-            </p>
-          </div>
         </div>
       </div>
     </div>

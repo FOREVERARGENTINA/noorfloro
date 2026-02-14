@@ -7,10 +7,16 @@ npm run dev
 npm run build
 ```
 
-## Deploy manual (Workers)
+## Deploy
 ```bash
-npm run pages:build
-npx wrangler deploy
+git add .
+git commit -m "Descripción de cambios"
+git push
+```
+
+El deploy a Vercel es automático al hacer push. Si no está configurado, usa:
+```bash
+npx vercel --prod
 ```
 
 ## Rutas utiles

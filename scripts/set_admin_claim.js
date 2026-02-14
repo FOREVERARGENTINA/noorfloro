@@ -45,7 +45,7 @@ const resolveUser = async () => {
 }
 
 const user = await resolveUser()
-await auth.setCustomUserClaims(user.uid, { role: 'admin' })
+await auth.setCustomUserClaims(user.uid, { admin: true, role: 'admin' })
 
 console.log(`OK: role=admin asignado a UID ${user.uid}`)
 console.log('Importante: el usuario debe cerrar sesión y volver a iniciar.')

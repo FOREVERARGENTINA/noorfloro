@@ -6,7 +6,7 @@ Sin carrito ni pasarela de pagos.
 
 ## Stack
 - Next.js 15 + React 18 + Tailwind CSS 4
-- Hosting: Cloudflare Workers (OpenNext)
+- Hosting: Vercel
 - Datos: Firebase Firestore
 - Imagenes: Firebase Storage
 - Auth: Firebase Auth (admin)

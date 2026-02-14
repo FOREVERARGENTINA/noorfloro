@@ -36,7 +36,8 @@
       "Bash(npm run build:*)",
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Skill(frontend-design)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,6 @@
 # Cómo Hacer Deploy - NOORFLORO
 
-## El Proceso (3 pasos simples)
+## El Proceso (2 pasos simples)
 
 ### 1. Haz tus cambios en el código
 Edita lo que necesites: components, app, styles, etc.
@@ -12,38 +12,33 @@ git commit -m "Descripción de los cambios"
 git push
 ```
 
-### 3. Deploy automático
-**GitHub Actions hace el deploy automáticamente** cuando haces `git push` a `main`.
+### Deploy automático
+**Vercel hace el deploy automáticamente** cuando haces `git push` a `main`.
 
-- ✅ Ve el progreso en: https://github.com/FOREVERARGENTINA/noorfloro/actions
-- ✅ Tarda 2-3 minutos
+- ✅ Tarda 1-2 minutos
 - ✅ Cuando termine, tus cambios están en vivo
-
-## URL de Producción
-
-**https://noorfloro.foreverargentina.workers.dev/**
 
 ## ¿Cómo Funciona?
 
 1. Haces `git push` → GitHub recibe tus cambios
-2. GitHub Actions ejecuta `.github/workflows/deploy.yml`
-3. El workflow:
-   - Instala dependencias (`npm ci`)
-   - Hace build con OpenNext (`npm run pages:build`)
-   - Despliega a Cloudflare Workers (`npx wrangler deploy`)
+2. Vercel detecta el push automáticamente
+3. Vercel:
+   - Instala dependencias
+   - Hace build (`npm run build`)
+   - Despliega a producción
 4. Tu sitio se actualiza automáticamente
 
 ## Deploy Manual (solo si es necesario)
 
+Si Vercel no está configurado para deploy automático:
 ```bash
-npm run pages:build
-npx wrangler deploy
+npx vercel --prod
 ```
 
 ## Importante
 
-- ✅ Usamos **Cloudflare Workers** (NO Pages)
-- ✅ Deploy automático desde GitHub (NO manual)
+- ✅ Usamos **Vercel** para hosting
+- ✅ Deploy automático desde GitHub
 - ✅ Cada push a `main` = deploy automático
 - ✅ Si no ves cambios, verifica que hiciste commit y push
 
@@ -60,7 +55,7 @@ git commit -m "Mis cambios"
 git push
 ```
 
-**Ver logs del último deploy:**
-- Ve a: https://github.com/FOREVERARGENTINA/noorfloro/actions
-- Click en el último workflow
-- Revisa los logs de cada paso
+**Deploy manual si es necesario:**
+```bash
+npx vercel --prod
+```
