@@ -39,7 +39,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className="relative text-[13px] font-medium text-gray-500 hover:text-[#FA8F01] transition-colors duration-200 py-1 group"
+                className="relative text-[15px] font-medium text-gray-500 hover:text-[#FA8F01] transition-colors duration-200 py-1 group"
               >
                 {label}
                 <span

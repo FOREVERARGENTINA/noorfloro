@@ -1,12 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { categories, formatPrice, getCategoryName } from '@/lib/products'
 import { getProducts, getProductById, deleteProduct, updateProduct, setProduct, uploadProductImage } from '@/lib/firebase'
 import Toast from '@/components/Toast'
 import LoadingModal from '@/components/LoadingModal'
+
+const RichTextEditor = dynamic(() => import('@/components/RichTextEditor'), { ssr: false })
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([])
@@ -485,15 +488,11 @@ export default function AdminProductsPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="description" className="label">Descripción</label>
-                  <textarea
-                    id="description"
-                    name="description"
+                  <label className="label">Descripción</label>
+                  <RichTextEditor
                     value={formData.description}
-                    onChange={handleInputChange}
-                    rows={3}
-                    className="input"
-                    required
+                    onChange={(html) => setFormData(prev => ({ ...prev, description: html }))}
+                    placeholder="Escribí la descripción del producto..."
                   />
                 </div>
 

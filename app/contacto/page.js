@@ -42,7 +42,7 @@ export default function ContactPage() {
         {/* ── Info Cards ──────────────────────────────────────── */}
         <section className="bg-gray-50 border-b border-gray-100 py-6">
           <div className="container-custom">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
 
               {/* Dirección */}
               <a
@@ -80,6 +80,23 @@ export default function ContactPage() {
                   <div className="text-[9px] font-bold tracking-[0.18em] uppercase text-gray-400 mb-0.5">WhatsApp</div>
                   <div className="text-sm font-semibold text-gray-800">(11) 6296-1526</div>
                   <div className="text-xs text-gray-500">Escribinos ahora</div>
+                </div>
+              </a>
+
+              {/* Teléfono fijo */}
+              <a
+                href="tel:+541147115185"
+                className="group flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100 hover:border-[#FA8F01]/30 hover:shadow-md transition-all duration-300"
+              >
+                <div className="shrink-0 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(250,143,1,0.08)' }}>
+                  <svg className="w-4 h-4 text-[#FA8F01]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-[9px] font-bold tracking-[0.18em] uppercase text-gray-400 mb-0.5">Teléfono fijo</div>
+                  <div className="text-sm font-semibold text-gray-800">(11) 4711-5185</div>
+                  <div className="text-xs text-gray-500">Llamanos directamente</div>
                 </div>
               </a>
 
