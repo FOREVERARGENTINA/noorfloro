@@ -386,9 +386,10 @@ export default function ProductDetailPage() {
               <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl font-display">
                 {product.name}
               </h1>
-              <p className="mt-3 text-base text-slate-600 whitespace-pre-line">
-                {product.description}
-              </p>
+              <div
+                className="mt-3 text-base text-slate-600 product-description"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
 
               <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <div className="flex items-center justify-between gap-4">

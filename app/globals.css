@@ -486,3 +486,17 @@
   text-decoration: underline;
 }
 
+/* ── Renderizado de descripción HTML en página de producto ── */
+.product-description { font-size: 0.875rem; line-height: 1.6; color: inherit; }
+.product-description h2 { font-size: 1.125rem; font-weight: 700; margin: 0.75rem 0 0.25rem; color: #111827; }
+.product-description h3 { font-size: 1rem; font-weight: 600; margin: 0.5rem 0 0.25rem; color: #111827; }
+.product-description p { margin: 0.25rem 0; }
+.product-description strong { font-weight: 700; }
+.product-description em { font-style: italic; }
+.product-description s { text-decoration: line-through; }
+.product-description u { text-decoration: underline; }
+.product-description ul { list-style-type: disc; padding-left: 1.25rem; margin: 0.25rem 0; }
+.product-description ol { list-style-type: decimal; padding-left: 1.25rem; margin: 0.25rem 0; }
+.product-description li { margin: 0.1rem 0; }
+.product-description blockquote { border-left: 3px solid #f43f5e; padding-left: 0.75rem; margin: 0.5rem 0; color: #6b7280; font-style: italic; }
+.product-description a { color: #e11d48; text-decoration: underline; }

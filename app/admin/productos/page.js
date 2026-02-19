@@ -391,7 +391,7 @@ export default function AdminProductsPage() {
                         </div>
                         <div>
                           <p className="text-sm font-medium text-gray-900">{product.name}</p>
-                          <p className="text-xs text-gray-500 line-clamp-1">{product.description}</p>
+                          <p className="text-xs text-gray-500 line-clamp-1">{product.description?.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}</p>
                         </div>
                       </div>
                     </td>

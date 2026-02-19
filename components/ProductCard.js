@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
             {product.name}
           </h3>
           <p className="text-gray-500 text-xs mb-3 line-clamp-2 leading-relaxed">
-            {product.description}
+            {product.description?.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}
           </p>
           {product.price !== null && product.price !== undefined && !Number.isNaN(Number(product.price)) && (
             <span className="text-xl font-bold text-[#FA8F01]">
