@@ -231,23 +231,26 @@ export default function ProductDetailPage() {
           <div className="absolute top-40 -left-20 h-80 w-80 rounded-full bg-[#0EA5E9]/10 blur-3xl"></div>
         </div>
 
-        <div className="container-custom relative py-8 lg:py-12">
-          <button
-            onClick={() => router.back()}
-            className="mb-6 inline-flex items-center gap-3 px-5 py-3 bg-white hover:bg-gray-50 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 group"
-          >
-            <svg className="w-6 h-6 text-gray-600 group-hover:text-noorfloro-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span className="text-base font-semibold text-gray-700 group-hover:text-gray-900">Volver</span>
-          </button>
+        <div className="container-custom relative py-3 lg:py-5">
 
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
             <section className="rounded-3xl bg-white p-4 shadow-xl shadow-slate-200/40">
               <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Galeria</p>
-                  <p className="text-sm text-slate-600">Imagenes del producto</p>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => router.back()}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors group"
+                    aria-label="Volver"
+                  >
+                    <svg className="w-4 h-4 text-slate-500 group-hover:text-noorfloro-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span className="text-xs font-semibold text-slate-500 group-hover:text-slate-700">Volver</span>
+                  </button>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Galeria</p>
+                    <p className="text-sm text-slate-600">Imagenes del producto</p>
+                  </div>
                 </div>
                 <button
                   onClick={() => openLightbox(activeImageIndex)}
