@@ -225,7 +225,7 @@ export default function ProductDetailPage() {
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
 
-      <main id="main-content" className="relative">
+      <main id="main-content" className="relative overflow-x-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-24 right-0 h-72 w-72 rounded-full bg-[#FA8F01]/20 blur-3xl"></div>
           <div className="absolute top-40 -left-20 h-80 w-80 rounded-full bg-[#0EA5E9]/10 blur-3xl"></div>
@@ -234,7 +234,7 @@ export default function ProductDetailPage() {
         <div className="container-custom relative py-3 lg:py-5">
 
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <section className="rounded-3xl bg-white p-4 shadow-xl shadow-slate-200/40">
+            <section className="rounded-3xl bg-white p-4 shadow-xl shadow-slate-200/40 min-w-0 overflow-hidden">
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <button
@@ -249,12 +249,12 @@ export default function ProductDetailPage() {
                   </button>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Galeria</p>
-                    <p className="text-sm text-slate-600">Imagenes del producto</p>
+                    <p className="hidden sm:block text-sm text-slate-600">Imagenes del producto</p>
                   </div>
                 </div>
                 <button
                   onClick={() => openLightbox(activeImageIndex)}
-                  className="rounded-full bg-[#FA8F01] hover:bg-[#E85A2B] px-4 py-2 text-xs font-semibold text-white transition-all shadow-md hover:shadow-lg cursor-pointer"
+                  className="shrink-0 whitespace-nowrap rounded-full bg-[#FA8F01] hover:bg-[#E85A2B] px-4 py-2 text-xs font-semibold text-white transition-all shadow-md hover:shadow-lg cursor-pointer"
                   title="Ver galería completa"
                 >
                   {images.length || 0} {images.length === 1 ? 'foto' : 'fotos'}
@@ -376,7 +376,7 @@ export default function ProductDetailPage() {
               </div>
             </section>
 
-            <aside className="rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/40 lg:sticky lg:top-24">
+            <aside className="rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/40 lg:sticky lg:top-24 min-w-0 overflow-hidden">
               <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] text-slate-500">
                   {categoryLabel}
@@ -386,7 +386,7 @@ export default function ProductDetailPage() {
                 </span>
               </div>
 
-              <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl font-display">
+              <h1 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl font-display break-words">
                 {product.name}
               </h1>
               <div

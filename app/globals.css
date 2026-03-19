@@ -259,6 +259,49 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
+/* Previene desbordes en contenido dinámico de productos (tablas, imágenes externas, etc.) */
+.product-description {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  overflow: hidden;
+}
+
+.product-description * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.product-description a {
+  word-break: break-all;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.product-description img,
+.product-description iframe,
+.product-description video,
+.product-description embed,
+.product-description object,
+.product-description table {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.product-description pre,
+.product-description code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* extra defensa global contra desbordes horizontales no deseados */
+body {
+  overflow-x: hidden;
+}
+
 /* Touch-friendly spacing */
 .tap-target {
   min-width: 44px;
