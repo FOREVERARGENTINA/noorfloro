@@ -37,7 +37,8 @@
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
       "Bash(dir:*)",
-      "Skill(frontend-design)"
+      "Skill(frontend-design)",
+      "Bash(rtk git *)"
     ],
     "deny": [],
     "ask": []
