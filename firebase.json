@@ -12,7 +12,8 @@
     {
       "site": "noorfloro",
       "public": "public",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": ["firebase.json", "**/.*",
+      "**/.*/**", "**/node_modules/**"],
       "rewrites": [
         { "source": "/api/**", "function": "createPaymentPreference" },
         { "source": "**", "destination": "/index.html" }
