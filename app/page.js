@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -34,9 +35,13 @@ export default function HomePage() {
 
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className="relative text-white overflow-hidden min-h-[650px] flex items-center justify-center">
-          <img
+          <Image
             src="/images/hero.webp"
-            alt="Hero"
+            alt="Showroom de pisos y revestimientos NOORFLORO"
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
             className="absolute inset-0 w-full h-full object-cover"
           />
           {/* layered overlay: vignette + bottom fade */}
@@ -52,14 +57,14 @@ export default function HomePage() {
 
               <div className="md:col-span-2">
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo.webp"
                   alt="NOORFLORO"
                   className="fade-in-left mx-auto md:mx-0 mb-4 md:mb-0 w-full max-w-2xl h-auto drop-shadow-xl"
                 />
               </div>
 
               <div className="md:col-span-1">
-                <span className="fade-in-delay inline-block text-[10px] font-bold tracking-[0.28em] uppercase text-white bg-[#FA8F01] rounded px-3 py-1 mb-5">
+                <span className="fade-in-delay inline-block text-[10px] font-bold tracking-[0.28em] uppercase text-white bg-[#B45309] rounded px-3 py-1 mb-5">
                   Pisos &amp; Revestimientos
                 </span>
                 <h1 className="fade-in-delay text-4xl lg:text-5xl font-bold mb-5 leading-tight">
@@ -89,6 +94,7 @@ export default function HomePage() {
         {/* ── Beneficios ────────────────────────────────────────── */}
         <section className="section bg-white border-b border-gray-100">
           <div className="container-custom">
+            <h2 className="sr-only">Beneficios de comprar en NOORFLORO</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
               {[
                 {
@@ -122,7 +128,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[9px] font-bold tracking-[0.2em] text-[#FA8F01]/50 uppercase mb-1">{item.num}</div>
+                    <div className="text-[9px] font-bold tracking-[0.2em] text-[#B45309] uppercase mb-1">{item.num}</div>
                     <h3 className="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
                   </div>
@@ -138,14 +144,14 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
               <div>
-                <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#FA8F01] mb-2">Selección especial</p>
+                <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#B45309] mb-2">Selección especial</p>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                   Productos Destacados
                 </h2>
               </div>
               <Link
                 href="/productos"
-                className="text-sm font-semibold text-[#FA8F01] hover:text-[#E85A2B] transition-colors flex items-center gap-1.5 shrink-0"
+                className="text-sm font-semibold text-[#B45309] hover:text-[#8A3207] transition-colors flex items-center gap-1.5 shrink-0"
               >
                 Ver todos
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

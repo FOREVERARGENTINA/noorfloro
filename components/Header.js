@@ -25,7 +25,7 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img src="/images/logo.png" alt="NOORFLORO" className="h-10 w-auto" />
+            <img src="/images/logo.webp" alt="NOORFLORO" className="h-10 w-auto" />
             <span className="sr-only">NOORFLORO</span>
           </Link>
 

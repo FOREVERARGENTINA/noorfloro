@@ -33,7 +33,7 @@ export default function AdminNav() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/admin" className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded">
-            <img src="/images/logo.png" alt="NOORFLORO" className="h-10 w-auto" />
+            <img src="/images/logo.webp" alt="NOORFLORO" className="h-10 w-auto" />
             <span className="text-xs text-gray-500">Administración</span>
           </Link>
 
