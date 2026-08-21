@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
-import { getFeaturedProducts } from '@/lib/firebase'
+import { getFeaturedProducts } from '@/lib/publicProducts'
 
 export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState([])

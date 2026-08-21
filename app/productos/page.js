@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
 import { categories } from '@/lib/products'
-import { getProducts } from '@/lib/firebase'
+import { getProducts } from '@/lib/publicProducts'
 
 export default function ProductosPage() {
   const [selectedCategory, setSelectedCategory] = useState('todos')

@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { formatPrice, getCategoryName } from '@/lib/products'
-import { getProductById } from '@/lib/firebase'
+import { getProductById } from '@/lib/publicProducts'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 

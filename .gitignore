@@ -32,3 +32,4 @@ serviceAccountKey.json
 # temp files
 **/scratchpad*.json
 CUserscasa*
+.gstack/
