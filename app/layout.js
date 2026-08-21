@@ -1,5 +1,20 @@
 import './globals.css'
 import Script from 'next/script'
+import { Manrope, Space_Grotesk } from 'next/font/google'
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-manrope',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
 
 export const metadata = {
   metadataBase: new URL('https://noorfloro.com.ar'),
@@ -50,7 +65,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
       <head>
         <Script
           async
@@ -65,12 +80,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-SPY6DL688C');
           `}
         </Script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-        />
 
         {/* Author / Creator (internal credit) */}
         <link rel="author" href="https://www.FrandoWeb.com" />

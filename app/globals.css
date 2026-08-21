@@ -7,7 +7,7 @@
 
   body {
     min-height: 100vh;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-manrope), sans-serif;
   }
 
   *:focus-visible {
@@ -256,7 +256,7 @@
 }
 
 .font-display {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Previene desbordes en contenido dinámico de productos (tablas, imágenes externas, etc.) */

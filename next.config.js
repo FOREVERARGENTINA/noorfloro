@@ -4,9 +4,10 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Image optimization configuration
-  // Images are served unoptimized for compatibility
+  // Vercel runs Next.js with a server, so the built-in image optimizer
+  // (/_next/image) resizes and re-encodes images on demand.
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

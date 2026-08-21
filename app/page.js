@@ -56,9 +56,13 @@ export default function HomePage() {
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-8 text-center md:text-left">
 
               <div className="md:col-span-2">
-                <img
+                <Image
                   src="/images/logo.webp"
                   alt="NOORFLORO"
+                  width={810}
+                  height={196}
+                  priority
+                  sizes="(max-width: 768px) 90vw, 672px"
                   className="fade-in-left mx-auto md:mx-0 mb-4 md:mb-0 w-full max-w-2xl h-auto drop-shadow-xl"
                 />
               </div>
