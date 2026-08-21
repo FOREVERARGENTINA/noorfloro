@@ -125,7 +125,7 @@ export default function Footer() {
           </p>
           <p className="mt-2 text-gray-300">
             Sitio desarrollado por{' '}
-            <a href="https://www.FrandoWeb.com" target="_blank" rel="noopener noreferrer" className="font-bold text-[#FA8F01] hover:underline">
+            <a href="https://www.frandoweb.com.ar" target="_blank" rel="noopener noreferrer" className="font-bold text-[#FA8F01] hover:underline">
               FrandoWeb
             </a>
           </p>
