@@ -596,7 +596,7 @@ export default function AdminProductsPage() {
                         </label>
                       </div>
                       <p className="text-xs text-gray-500 mt-2">
-                        💡 Haz clic en "Agregar más" para subir imágenes adicionales. La primera imagen será la principal.
+                        💡 Haz clic en &quot;Agregar más&quot; para subir imágenes adicionales. La primera imagen será la principal.
                       </p>
                     </div>
                   )}
