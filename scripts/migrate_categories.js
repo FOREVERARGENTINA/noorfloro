@@ -40,9 +40,13 @@ const CATEGORY_MAP = {
 
 async function main() {
   // Inicializar Firebase Admin
-  const serviceAccountPath = path.resolve(process.cwd(), 'serviceAccountKey.json')
+  // Ruta configurable: la clave no deberia vivir en la raiz del repo.
+  const serviceAccountPath = path.resolve(
+    process.env.FIREBASE_SERVICE_ACCOUNT || path.join(process.cwd(), 'serviceAccountKey.json')
+  )
   if (!fs.existsSync(serviceAccountPath)) {
-    console.error('serviceAccountKey.json not found in project root.')
+    console.error(`Service account no encontrado en: ${serviceAccountPath}`)
+    console.error('Configura FIREBASE_SERVICE_ACCOUNT con la ruta al archivo de credenciales.')
     process.exit(1)
   }
 

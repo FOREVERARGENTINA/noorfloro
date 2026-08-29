@@ -1,22 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
-
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-      const total = cart.reduce((sum, item) => sum + item.quantity, 0)
-      setCartCount(total)
-    }
-    updateCartCount()
-    window.addEventListener('cartUpdated', updateCartCount)
-    return () => window.removeEventListener('cartUpdated', updateCartCount)
-  }, [])
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">

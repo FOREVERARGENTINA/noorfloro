@@ -1,15 +1,5 @@
 {
   "projects": {
     "default": "frandoweb-4c2c7"
-  },
-  "targets": {
-    "frandoweb-4c2c7": {
-      "hosting": {
-        "noorfloro-target": [
-          "noorfloro"
-        ]
-      }
-    }
-  },
-  "etags": {}
+  }
 }

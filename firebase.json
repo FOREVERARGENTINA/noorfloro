@@ -4,20 +4,5 @@
   },
   "storage": {
     "rules": "storage.rules"
-  },
-  "functions": {
-    "source": "firebase-functions"
-  },
-  "hosting": [
-    {
-      "site": "noorfloro",
-      "public": "public",
-      "ignore": ["firebase.json", "**/.*",
-      "**/.*/**", "**/node_modules/**"],
-      "rewrites": [
-        { "source": "/api/**", "function": "createPaymentPreference" },
-        { "source": "**", "destination": "/index.html" }
-      ]
-    }
-  ]
+  }
 }

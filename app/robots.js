@@ -5,7 +5,7 @@ export default function robots() {
         userAgent: '*',
         // Explicitly allow the llms.txt file so crawlers/LLMs can fetch it
         allow: ['/', '/llms.txt'],
-        disallow: ['/admin', '/checkout', '/carrito'],
+        disallow: ['/admin'],
       },
     ],
     sitemap: 'https://noorfloro.com.ar/sitemap.xml',
