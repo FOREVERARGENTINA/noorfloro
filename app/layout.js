@@ -22,6 +22,8 @@ export const metadata = {
   description: 'Especialistas en pisos flotantes, vinílicos, baldosas autoadhesivas, césped sintético, alfombras y revestimientos para pared. Envíos a todo el país.',
   keywords: ['pisos flotantes', 'pisos vinílicos', 'baldosas autoadhesivas', 'césped sintético', 'alfombras', 'revestimientos', 'noorfloro'],
   authors: [{ name: 'NOORFLORO' }],
+  creator: 'Hernan de FrandoWeb',
+  publisher: 'NOORFLORO',
   icons: {
     icon: '/images/favicon.ico',
   },
@@ -82,8 +84,9 @@ export default function RootLayout({ children }) {
         </Script>
 
         {/* Author / Creator (internal credit) */}
-        <link rel="author" href="https://www.FrandoWeb.com" />
+        <link rel="author" href="https://www.frandoweb.com.ar/" />
         <meta name="author" content="Hernan de FrandoWeb" />
+        <meta name="creator" content="Hernan de FrandoWeb" />
 
         {/* Social profile links for verification / metadata */}
         <link rel="me" href="https://www.instagram.com/Noorfloro23" />

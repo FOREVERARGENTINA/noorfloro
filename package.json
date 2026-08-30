@@ -15,7 +15,7 @@
     "prebuild": "node scripts/check-encoding.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Hernan de FrandoWeb (https://www.frandoweb.com.ar/)",
   "license": "ISC",
   "type": "module",
   "browserslist": [

@@ -1,71 +1,108 @@
-
 NOORFLORO - Pisos y Revestimientos
 
-Tienda online y local especializada en pisos, revestimientos y accesorios. Ventas online, cotizaciones por volumen, envíos a todo el país y retiro en tienda.
+Tienda online y local especializada en pisos, revestimientos y accesorios. Catálogo público, asesoramiento comercial, cotizaciones por volumen, envíos a todo el país y retiro en tienda.
 
 # About
 
-NOORFLORO es una tienda (local + e‑commerce) ubicada en Olivos (Vicente López, Buenos Aires) especializada en pisos y revestimientos para obras, reformas y proyectos comerciales o residenciales. Ofrecemos un catálogo de pisos flotantes, pisos vinílicos (sistema click), listones autoadhesivos, baldosas vinílicas, césped sintético, alfombras, felpudos, zócalos y revestimientos de pared. Atendemos clientes finales y profesionales; las cotizaciones y el despacho se coordinan por canales oficiales.
+NOORFLORO es una tienda con local físico y catálogo online ubicada en Olivos, Vicente López, Buenos Aires, Argentina. Se especializa en pisos y revestimientos para obras, reformas, hogares, comercios y proyectos profesionales.
+
+El sitio permite consultar productos, ver fichas individuales y contactar al negocio para confirmar stock, precio, formas de pago, retiro o envío. Las compras, cotizaciones y despachos se coordinan por canales oficiales.
+
+# Business / Organization
+
+- Nombre comercial: NOORFLORO
+- Rubro: Pisos, revestimientos y accesorios para interiores/exteriores
+- Sitio web: https://noorfloro.com.ar
+- País: Argentina
+- Provincia: Buenos Aires
+- Localidad: Olivos, Vicente López
+- Dirección: Av. Maipú 3366, Olivos, Vicente López, Buenos Aires, Argentina
+- Idioma principal del sitio: Español de Argentina
 
 # Contact
 
-NOORFLORO
-- Web: https://noorfloro.com.ar
-- Dirección: Av. Maipú 3366, Olivos, Vicente López, Buenos Aires, Argentina
-- WhatsApp: +54 9 11 6296 1526 — https://wa.me/5491162961526
+- WhatsApp: +54 9 11 6296 1526
+- WhatsApp URL: https://wa.me/5491162961526
 - Teléfono fijo: +54 11 4711 5185
 - Email: noorfloro23@hotmail.com
-- Horario: Lun–Vie 09:30–17:00, Sáb 09:30–13:00
+- Instagram: https://www.instagram.com/Noorfloro23
+- Facebook: https://www.facebook.com/p/Noorfloro-100070396863140/
+- Horario: Lunes a viernes 09:30-17:00; sábados 09:30-13:00
 
-# Services / Products
+# Products / Categories
 
-- Catálogo online: https://noorfloro.com.ar/productos
-- Venta por unidad y por volumen de: Pisos Flotantes; Pisos Vinílico 4+1mm (sistema click); Pisos en listón autoadhesivo; Baldosas vinílicas 50x50; Césped sintético; Alfombra Bouclé; Felpudos de coco; Zócalos; Revestimientos de pared (wall panel / placas autoadhesivas).
-- Envíos: cobertura en CABA, GBA y resto del país (costos y plazos según volumen y destino). Retiro en tienda disponible (coordinar por WhatsApp).
-- Pagos: integración con Mercado Pago (implementación en backend), y opciones por transferencia o coordinación por canales oficiales.
+- Pisos flotantes
+- Pisos vinílicos 4+1 mm con sistema click
+- Pisos en listón autoadhesivo 1.2 mm
+- Baldosas vinílicas autoadhesivas 50x50
+- Césped sintético
+- Alfombra Boucle doble base
+- Felpudos de coco
+- Zócalos
+- Revestimiento de pared: wall panel de PVC
+- Revestimiento de pared: placas autoadhesivas
+
+# Services
+
+- Catálogo online de productos
+- Fichas de producto indexables
+- Atención por WhatsApp, teléfono, email y formulario de contacto
+- Cotizaciones para clientes finales, profesionales, instaladores, comercios y obras
+- Envíos en CABA, GBA y resto del país, según volumen, peso, destino y operador logístico
+- Retiro en tienda en Av. Maipú 3366, Olivos, coordinando previamente
 
 # Key Pages
 
 - Home: https://noorfloro.com.ar
 - Catálogo: https://noorfloro.com.ar/productos
-- Ficha de producto (dinámica): https://noorfloro.com.ar/producto/{id}
-- Carrito: https://noorfloro.com.ar/carrito
-- Checkout: https://noorfloro.com.ar/checkout
+- Ficha de producto: https://noorfloro.com.ar/producto/{id-o-slug}
 - Contacto: https://noorfloro.com.ar/contacto
 - Envíos: https://noorfloro.com.ar/envios
 - Privacidad: https://noorfloro.com.ar/privacidad
 - Términos: https://noorfloro.com.ar/terminos
 - Sitemap: https://noorfloro.com.ar/sitemap.xml
+- Robots: https://noorfloro.com.ar/robots.txt
 
 # Target Audience
 
 - Hogares que renuevan pisos y revestimientos
-- Contratistas, arquitectos e instaladores
-- Comercios y oficinas que buscan soluciones de piso
-- Clientes en Argentina que requieren envío o retiro local
+- Contratistas, arquitectos, instaladores y diseñadores
+- Comercios, oficinas y espacios profesionales
+- Clientes en Argentina que buscan envío o retiro local
 
 # Unique Value Proposition
 
-1. Selección amplia y técnica de pisos y revestimientos para proyectos residenciales y comerciales.
-2. Envíos nacionales y retiro en tienda con atención directa por WhatsApp.
-3. Plataforma web moderna + tienda física; soporte de pagos y seguimiento de pedidos.
+1. Selección amplia de pisos, revestimientos y accesorios para proyectos residenciales y comerciales.
+2. Atención directa por canales oficiales para confirmar stock, precio, retiro, envío y cotizaciones.
+3. Catálogo web moderno con productos indexables y tienda física en Olivos.
 
 # SEO Keywords
 
-pisos vinílicos, pisos flotantes, revestimientos, césped sintético, alfombra bouclé, baldosas vinílicas, zócalos, felpudos, noorfloro
+pisos vinílicos, pisos flotantes, revestimientos, revestimientos de pared, wall panel PVC, placas autoadhesivas, césped sintético, alfombra bouclé, baldosas vinílicas, zócalos, felpudos, pisos en Olivos, pisos en Vicente López, NOORFLORO
 
 # Pricing
 
-- Precios por producto y presentación; consultar en la ficha del producto o solicitar cotización por WhatsApp/email. Costos de envío y plazos se cotizan según volumen y destino.
+Los precios dependen del producto, presentación, stock y condiciones comerciales. Consultar en la ficha de producto o solicitar cotización por WhatsApp/email. Los costos y plazos de envío se confirman según volumen, peso, destino y operador logístico.
 
-# Tech Stack
+# Payments
 
-- Frontend: Next.js 15, React 18, Tailwind CSS
-- Backend / DB: Firebase (Firestore) + Firebase Auth
-- Pagos: Mercado Pago (integración frontend/backend prevista)
-- Hosting / Deploy: Vercel (proyecto configurado) / Cloudflare
-- Herramientas: GitHub, VS Code
+El sitio funciona como catálogo online. Las formas de pago se coordinan por canales oficiales al confirmar la compra o cotización.
 
---
+# Technical Notes
 
-Última actualización: 2026-04-17. Mantener este archivo actualizado cuando cambien servicios, contacto o URLs.
+- Framework: Next.js 15
+- UI: React 18 + Tailwind CSS
+- Base de datos: Firebase Firestore
+- Autenticación admin: Firebase Auth
+- Hosting principal: Vercel
+- Sitemap dinámico: incluye páginas públicas y fichas de producto
+- Robots: permite `/llms.txt` y deshabilita rastreo de `/admin`
+
+# Creator / Developer
+
+- Sitio desarrollado por: FrandoWeb
+- Crédito interno de autoría: Hernan Frandolich
+- Constacto WhatsApp 5491128074000
+- Web del desarrollador: https://www.frandoweb.com.ar/
+
+Última actualización: 2026-08-29. Mantener este archivo actualizado cuando cambien servicios, contacto, URLs, categorías, formas de pago o datos de creador.
