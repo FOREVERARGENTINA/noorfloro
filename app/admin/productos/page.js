@@ -5,7 +5,8 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { categories, formatPrice, getCategoryName } from '@/lib/products'
-import { getProducts, getProductById, deleteProduct, updateProduct, setProduct, uploadProductImage } from '@/lib/firebase'
+import { getProducts, getProductById, deleteProduct, updateProduct, setProduct, uploadProductImage, getAuthInstance } from '@/lib/firebase'
+import { revalidateProducts } from '@/lib/revalidateProducts'
 import Toast from '@/components/Toast'
 import LoadingModal from '@/components/LoadingModal'
 
@@ -108,11 +109,28 @@ export default function AdminProductsPage() {
     setShowModal(true)
   }
 
+  // Publica el cambio al instante. Si falla, el catalogo igual se actualiza
+  // en la proxima revalidacion (1h): no se interrumpe el guardado.
+  const publishChanges = async (slug) => {
+    try {
+      const auth = await getAuthInstance()
+      const idToken = await auth.currentUser?.getIdToken()
+      if (!idToken) return
+      const result = await revalidateProducts(idToken, slug)
+      if (!result?.ok) {
+        console.error('No se pudo revalidar el catalogo:', result?.error)
+      }
+    } catch (error) {
+      console.error('No se pudo revalidar el catalogo:', error)
+    }
+  }
+
   const handleDelete = async (productId) => {
     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
       try {
         setSaving(true)
         await deleteProduct(productId)
+        await publishChanges(productId)
         setProducts(prev => prev.filter(p => p.id !== productId))
         setToast({ message: 'Producto eliminado correctamente', type: 'success' })
       } catch (error) {
@@ -223,11 +241,13 @@ export default function AdminProductsPage() {
       if (editingProduct) {
         // Update existing product
         await updateProduct(editingProduct.id, productData)
+        await publishChanges(editingProduct.id)
         setProducts(prev => prev.map(p => p.id === editingProduct.id ? { ...productData, id: editingProduct.id } : p))
         setToast({ message: 'Producto actualizado correctamente', type: 'success' })
       } else {
         // Add new product
         await setProduct(slug, productData)
+        await publishChanges(slug)
         setProducts(prev => [...prev, { ...productData, id: slug }])
         setToast({ message: 'Producto agregado correctamente', type: 'success' })
       }

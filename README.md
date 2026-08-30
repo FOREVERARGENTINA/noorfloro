@@ -16,8 +16,10 @@ Las paginas publicas de catalogo son Server Components con ISR (revalidate 1h):
 - `/producto/[id]` es SSG via `generateStaticParams`.
 
 El contenido indexable (nombre, descripcion, precio, stock) viaja en el HTML
-inicial. Tras editar productos en `/admin`, los cambios se publican en la
-siguiente revalidacion.
+inicial. Al guardar en `/admin` los cambios se publican al instante mediante
+una Server Action que valida el claim de admin y revalida `/productos`,
+`/sitemap.xml` y la ficha afectada. Requiere `FIREBASE_SERVICE_ACCOUNT_JSON`;
+sin esa variable el catalogo se actualiza igual en la revalidacion de 1h.
 
 ## Desarrollo local
 ```bash
