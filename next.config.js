@@ -7,7 +7,10 @@ const nextConfig = {
   // Vercel runs Next.js with a server, so the built-in image optimizer
   // (/_next/image) resizes and re-encodes images on demand.
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/webp'],
+    deviceSizes: [640, 828, 1080, 1920],
+    imageSizes: [64, 96, 128, 256, 384],
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: 'https',
