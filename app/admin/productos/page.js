@@ -155,6 +155,8 @@ export default function AdminProductsPage() {
       return
     }
 
+    // TODO(images): validar file.size aquí (el UI promete "hasta 2MB" pero nunca se chequea)
+
     // Agregar nuevas imágenes a las existentes
     const newPreviews = files.map(file => URL.createObjectURL(file))
     setImageFiles(prev => [...prev, ...files])
@@ -215,6 +217,11 @@ export default function AdminProductsPage() {
       // Subir solo las imágenes nuevas
       let newImageUrls = []
       if (imageFiles.length > 0) {
+        // TODO(images): el nombre incluye Date.now(), así que re-subir una foto
+        // crea un objeto nuevo en Storage en vez de reemplazar el existente:
+        // deja huérfanos en Firebase y enfría el caché de Vercel Image Optimization
+        // en cada reemplazo. Resolver con nombre estable (p.ej. slug del producto
+        // + índice) al rediseñar el flujo de reemplazo de imágenes.
         newImageUrls = await Promise.all(
           imageFiles.map(async (file) => {
             const safeName = String(Date.now()) + '-' + file.name

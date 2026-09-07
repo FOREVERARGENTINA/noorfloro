@@ -373,6 +373,12 @@ Cada riesgo → se vuelve Zona Roja
 
 Cada decisión → se fija como regla
 
+🔧 TODOs Conocidos (ver también comentarios `TODO(images)` en el código)
+
+- **Validar tamaño de imagen en admin.** `handleImageChange` en `app/admin/productos/page.js` solo valida `file.type`, nunca `file.size`, aunque el UI promete "hasta 2MB". Agregar el check ahí.
+- **Nombre de archivo estable al subir imágenes.** `app/admin/productos/page.js` genera el nombre con `Date.now() + '-' + file.name` al llamar `uploadProductImage`. Re-subir una foto crea un objeto nuevo en Firebase Storage (huérfano el viejo) y enfría el caché de Vercel Image Optimization en cada reemplazo. Resolver con nombre estable (slug del producto + índice) al rediseñar el flujo de reemplazo de imágenes — no como cambio aislado.
+- **Medir transformaciones de Vercel post-config (2026-09-07).** Se acotaron `deviceSizes`/`imageSizes` en `next.config.js` para bajar el consumo de Image Optimization (estaba en 77% de la cuota gratis). Revisar la pendiente diaria en el dashboard de Vercel a los 7-14 días; si sigue alta, sospechoso #1 es el punto anterior (nombres no estables).
+
 🎓 Principios de Documentación
 
 Este documento NO es Un README Un tutorial Documentación exhaustiva Este documento ES Un sistema de control de decisiones Un límite explícito al comportamiento del agente
