@@ -26,12 +26,23 @@ zoom 1.5x de la galería se pierde algo de nitidez, y es el costo aceptado.
 Ninguna imagen referenciada falta en Storage. La única colección que referencia
 Storage es `products`.
 
-### Borrado de 40 huérfanas (8,86 MB): aprobado, pendiente de ejecución
+### Borrado de 40 huérfanas (8,86 MB): EJECUTADO
 
-Aprobado por el responsable. **Todavía no ejecutado**: requiere
-`serviceAccountKey.json`, que no está en el proyecto (está en `.gitignore`).
+Ejecutado el 2026-09-11 con `scripts/delete_orphan_images.js --apply`.
+Borradas 40 de 40, 8,86 MB liberados.
 
-Preparado para correr:
+**Verificación posterior** (consultando Storage y Firestore directamente, no la
+salida del script):
+
+| Chequeo | Resultado |
+|---|---|
+| Objetos en `products/` | 97 (antes 137) |
+| Imágenes en uso | 97 |
+| Huérfanas restantes | 0 |
+| Imágenes en uso que falten | 0 |
+| Portadas de producto que cargan | 14 de 14 |
+
+Para volver a correrlo:
 
 ```bash
 node scripts/delete_orphan_images.js            # dry-run, solo reporta
