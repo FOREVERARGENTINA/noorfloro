@@ -26,11 +26,28 @@ zoom 1.5x de la galería se pierde algo de nitidez, y es el costo aceptado.
 Ninguna imagen referenciada falta en Storage. La única colección que referencia
 Storage es `products`.
 
-### Pendiente: borrar 40 huérfanas (8,86 MB)
+### Borrado de 40 huérfanas (8,86 MB): aprobado, pendiente de ejecución
 
-Identificadas y respaldadas, **no borradas**. Requiere confirmación explícita por
-ser irreversible. Doce de ellas comparten nombre base con una imagen en uso, o
-sea son versiones viejas reemplazadas al reeditar un producto.
+Aprobado por el responsable. **Todavía no ejecutado**: requiere
+`serviceAccountKey.json`, que no está en el proyecto (está en `.gitignore`).
+
+Preparado para correr:
+
+```bash
+node scripts/delete_orphan_images.js            # dry-run, solo reporta
+node scripts/delete_orphan_images.js --apply    # borra
+```
+
+El script re-verifica contra Firestore en el momento de correr y solo borra lo
+que sigue sin estar referenciado, así que es seguro aunque pase tiempo.
+
+**Respaldo previo:** las 40 se descargaron íntegras (8,86 MB verificados) a
+`D:\Aideas\NOORFLORO-backups\storage-huerfanas-2026-09-11\`. El borrado es
+reversible desde ahí.
+
+Se re-verificó el estado justo antes: 14 productos, 137 objetos, 97 en uso,
+cero conflictos, cero huérfanas nuevas. Doce comparten nombre base con una
+imagen en uso, o sea son versiones viejas reemplazadas al reeditar un producto.
 
 Se revisó `1788059828831-hero.webp` por ser la única reciente: la home usa
 `public/images/hero.webp` (57,5 KB, local), no la copia de Storage. Es huérfana
