@@ -1,5 +1,49 @@
 # Cambios
 
+## 2026-09-11 — Compresión de subida a 1200px + auditoría del bucket
+
+Se bajó `maxDimension` de 1600 a 1200 en `compressImage` (`lib/firebase.js`).
+Afecta solo a **subidas nuevas**; las imágenes ya almacenadas no cambian.
+
+**Por qué:** se midió el bucket `products/` antes de decidir. De 97 imágenes en
+uso, 92 ya eran WebP comprimidas en el cliente (promedio 109 KB), pero 7 pasaban
+los 300 KB (2,35 MB entre ellas) porque el límite de 1600px era generoso para el
+ancho real de renderizado.
+
+Anchos verificados con `sizes="(max-width:1024px) 100vw, 55vw"`: la galería pide
+como máximo unos 1056 px CSS en viewport de 1920. 1200 cubre el uso normal. En el
+zoom 1.5x de la galería se pierde algo de nitidez, y es el costo aceptado.
+
+### Estado del bucket al 2026-09-11
+
+| Concepto | Valor |
+|---|---|
+| Objetos totales | 137 (19,2 MB) |
+| Referenciados por productos | 97 (10,29 MB) |
+| Huérfanos | 40 (8,86 MB) |
+| Productos en Firestore | 14 |
+
+Ninguna imagen referenciada falta en Storage. La única colección que referencia
+Storage es `products`.
+
+### Pendiente: borrar 40 huérfanas (8,86 MB)
+
+Identificadas y respaldadas, **no borradas**. Requiere confirmación explícita por
+ser irreversible. Doce de ellas comparten nombre base con una imagen en uso, o
+sea son versiones viejas reemplazadas al reeditar un producto.
+
+Se revisó `1788059828831-hero.webp` por ser la única reciente: la home usa
+`public/images/hero.webp` (57,5 KB, local), no la copia de Storage. Es huérfana
+real.
+
+### Sobre `unoptimized: true` en `next.config.js`
+
+Evaluado y **no aplicado**. Corta la cuota de Vercel Image Optimization, pero la
+tabla del admin pinta miniaturas de 48 px y pasaría a descargar las portadas
+completas (1,53 MB para 14 filas). Queda como decisión abierta.
+
+---
+
 ## 2026-08-14 — Fix preventivo en `firebase.json`
 
 Se agregó `"**/.*/**"` al array `ignore`.
