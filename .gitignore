@@ -33,3 +33,6 @@ serviceAccountKey.json
 **/scratchpad*.json
 CUserscasa*
 .gstack/
+
+# Local Graphify knowledge-graph artifacts
+graphify-out/
